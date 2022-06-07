@@ -5,6 +5,6 @@ class Match < ApplicationRecord
     declined: 2
   }
 
-  belongs_to :user_requester, class_name: "User", foreign_key: 'user_requester'
-  belongs_to :user_receiver, class_name: "User", foreign_key: 'user_receiver'
+  belongs_to :user_requester, class_name: "User"
+  belongs_to :user_receiver, class_name: "User"
 end
