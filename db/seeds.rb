@@ -48,17 +48,17 @@ puts "start creating user_activities"
   )
 end
 
-puts "start creating matches"
-20.times do
-  users = User.all
-  user_1 = users.sample
-  user_2 = users.sample
-  while user_2 == user_1
-    user_2 = users.sample
-  end
-  Match.create!(
-    user_requester_id: user_1.id,
-    user_receiver_id: user_2.id
-)
-end
+# puts "start creating matches"
+# 20.times do
+#   users = User.all
+#   user_1 = users.sample
+#   user_2 = users.sample
+#   while user_2 == user_1
+#     user_2 = users.sample
+#   end
+#   Match.create!(
+#     user_requester_id: user_1.id,
+#     user_receiver_id: user_2.id
+# )
+# end
 puts "finished"

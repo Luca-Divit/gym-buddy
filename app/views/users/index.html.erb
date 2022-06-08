@@ -3,27 +3,33 @@
  <div class = "text-center">
    <h1>Your Matches</h1>
  </div>
+
   <% @users.each do |user| %>
-    <div class="card-category mt-5 mx-auto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user.photo.key, height: 500, width: 300, crop: :fill %>');">
-      <div class= " d-flex flex-gap">
-        <div>
-          <h3 class = "pt-4 ml-3"><%= user.first_name %>,  <%= user.age %></h3>
-          <p ><%= user.address %></p><br>
+    <div class="card-category mt-5 mx-auto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('');">
+      <div class=" d-flex flex-gap">
+        <div class="name">
+          <h2>Hi !
+            <br>
+            I'm <%= user.first_name %>
+          </h2>
         </div>
-        <div class = "text-bottom" >
-          <div class = "card-bottom-icon pt-3 d-flex justify-content-around">
-            <div>
-              <p>Swimming <i class="fa-solid fa-person-swimming"></i></p>
-            </div>
-            <div>
-              <p>Running <i class="fa-solid fa-person-running"></i></p>
-            </div>
-            <div>
-              <p>Lifting <i class="fa-solid fa-dumbbell"></i></p>
-            </div>
+        <div class="card">
+          <div class="card-body" style = "color: black">
+            <h5 class="card-title"><%= user.address %>, <%= user.age %>, <%= user.level_of_fitness%></h5>
+            <h6>I like:
+              <% user.activities.each do |activity| %>
+                <strong><%= activity.name %></strong>
+              <% end %>
+              <br>
+              Preferred days:
+              <% user.days_available.each do |day| %>
+                <strong><%= day %></strong>
+              <% end %>
+              <br>
+              Between <strong><%= user.start_time %></strong> & <strong><%= user.end_time %></strong>
+            </h6>
+            <p class="card-text"><%= user.bio %></p>
           </div>
-          <p class="px-2 "><i class="fa-solid fa-calendar-days" style= "color:#FFCE34"></i> Available days: Monday, Tuesday & Thursday </p>
-          <p class="px-2 "><i class="fa-solid fa-calendar-days" style= "color:#FFCE34"></i> Gender Preference: <%= user.partner_gender_preference %> </p>
         </div>
       </div>
     </div>
