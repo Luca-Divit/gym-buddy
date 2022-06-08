@@ -1,0 +1,41 @@
+<div class="wrapper d-flex flex-column justify-content-between">
+  <div class="container ">
+    <div class="content-aligned py-3 container">
+      <h1>GymBuddy</h1>
+    </div>
+    <div class="name mb-3">
+      <h2>Hi !
+        <br>
+        I'm <%= @user.first_name %>
+      </h2>
+    </div>
+    <div class="card-group">
+      <div class="card">
+        <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+        <div id="card" class="card-body">
+          <h5 class="card-title"><%= @user.address %>, <%= @user.age %>, <%= @user.level_of_fitness%></h5>
+          <h6>I like:
+            <% @user.activities.each do |activity| %>
+              <strong><%= activity.name %></strong>
+            <% end %>
+            <br>
+            Preferred days:
+            <% @user.days_available.each do |day| %>
+              <strong><%= day %></strong>
+            <% end %>
+            <br>
+            Between <strong><%= @user.start_time %></strong> & <strong><%= @user.end_time %></strong>
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div class="bio">
+      <p>Bio : <%= @user.bio %></p>
+    </div>
+    <div class="buttons d-flex justify-content-evenly">
+      <%= link_to "<<Skip", user_match_path(current_user, @user, status: 2), data:{ turbo_method: :patch }, class: "btn btn-dark" %>
+      <%= link_to "Connect", user_match_path(current_user, @user, status: 0), data:{ turbo_method: :patch }, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <%= render "shared/footer" %>
+</div>
