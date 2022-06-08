@@ -1,20 +1,28 @@
 <div class="card mb-4" style="width: 100%; background-color:#F4F4F4; ">
   <div class="card-body  mx-auto box-shadow: 0 0 15px rgba(0,0,0,0.2);">
-    <% @users.each do |user| %>
+    <% @users_matching.each do |user| %>
         <div class = "border border-1 mb-3">
-          <%= cl_image_tag user.photo.key, height: 500, width: 300, crop: :fill %>
+          <%#<%= cl_image_tag user.photo.key, height: 500, width: 300, crop: :fill %>
           <div class="mt-3 mb-3">
             <h2><%= user.first_name %>  <%= user.age %></h2>
           </div>
           <h5 class="card-title">Location: <%= user.address %></h5><br>
-          <% user.activities.each do |activity| %>
-            <%= activity.name %>
-          <% end %>
-          <%= user.gender %>
-          <%= user.level_of_fitness %>
-          <%= user.days_available  %>
-          <%= user.partner_gender_preference  %>
+          <ul>
+          <li> Activities: <% user.activities.each do |activity| %>
+            <%= activity.name.capitalize %> |
+          <% end %> </li>
+          <li>Gender: <%= user.gender %></li>
+          <li>Level of fitness: <%= user.level_of_fitness%></li>
+          <li>Days available: <%=user.days_available %></li>
+          <li>Partner preference: <%= user.partner_gender_preference%></li>
+          </ul>
         </div>
     <% end %>
   </div>
 </div>
+
+<%#
+1- first we need to match on location (for now location = location)
+2- then we need to match based on activities in common
+3- then we need to match based on days available
+4- %>
