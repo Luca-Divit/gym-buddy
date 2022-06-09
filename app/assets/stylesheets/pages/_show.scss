@@ -1,0 +1,32 @@
+.wrapper {
+  background-color: $black;
+  color: $our-white;
+  height: 100vh;
+  h1 {
+    color: $our-yellow;
+  }
+}
+
+.card-body {
+  h5 {
+    color: $our-white;
+  }
+
+  h6 {
+    color: $our-white;
+  }
+}
+
+#image {
+  height: 320px;
+}
+
+.container {
+  .bio {
+    color: $our-yellow;
+  }
+}
+
+#card {
+  background-color: black;
+}

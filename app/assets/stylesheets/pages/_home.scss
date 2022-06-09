@@ -12,16 +12,17 @@ body {
 .back {
   background-color: $black;
   color: $white;
+  height: 100vh;
 }
 
-h1 {
+.back h1 {
   font-size: calc(2.4rem + 1.5vw);
 }
 
-h2 {
+.back h2 {
   font-size: calc(1.600rem + 0.9vw);
 }
 
-p {
+.back p {
   font-size: calc(0.879rem + 0.9vw);
 }
