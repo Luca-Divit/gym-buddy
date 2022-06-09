@@ -19,7 +19,7 @@ end
 activity = Activity.all
 
 puts "start creating users"
-10.times do
+40.times do
   start_time1 = rand(5..23).to_i
   end_time1 = start_time1.to_i + rand(1..4).to_i
   user = User.create!(
@@ -28,7 +28,7 @@ puts "start creating users"
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     gender: Faker::Gender.binary_type.to_s,
-    address: Faker::Address.postcode,
+    address: "London",
     age: rand(15..50).to_i,
     level_of_fitness: ["Beginner","Intermediate","Advanced"].sample.to_s,
     days_available: ["Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday"].sample(2),
@@ -38,14 +38,16 @@ puts "start creating users"
     bio: ["Pain is temporary, pride is forever","Shut up and squat!","Forget the glass slippers, princess wear running shoes","Gym is my therapy.","Work. Train. Repeat.","Work hard now, selfie later.","Fit and Fat differ by middle alphabet.","I’m in a good place right now, not emotionally, I am just at the gym.","No pain, no gain. Shut up and train","Change your body by changing your thoughts.","Eat, sleep , gym , repeat." ].sample,
   )
 end
-user = User.all
+users = User.all
 
 puts "start creating user_activities"
-40.times do
+users.each do |user|
+  2.times do
   UserActivity.create!(
-    user_id: user.sample.id,
+    user_id: user.id,
     activity_id: activity.sample.id
   )
+  end
 end
 
 # puts "start creating matches"

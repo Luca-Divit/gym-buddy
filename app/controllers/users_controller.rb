@@ -3,36 +3,52 @@ class UsersController < ApplicationController
 
 
   def index
-    users_all = User.all
-    # user_filter = @users_all.where(partner_gender_preference: current_user.partner_gender_preference) ||
-    #   @users_all.where(level_of_fitness: current_user.level_of_fitness)
-    @users = common_activities2(users_all)
-    raise
-    # users = common_days(users_all)
+    users = User.all
+    @users_matching = User.all
 
-    # @users = new_users.reject { |user| user == current_user }
-  end
+    # 1 - get current user data
+    user1 = current_user
+    address = user1.address #get the adress of the current user
 
-  private
-
-  def common_days(users_all)
-    days = []
-    users_all.each do |user|
-      unless (user.days_available & current_user.days_available).empty?
-        days << user
-      end
+    current_user_activities_name = [] # get the activities of the current user if they exists
+    user1.activities.each do |activity|
+      current_user_activities_name << activity.name
     end
-    return days
-  end
 
-  def common_activities2(users)
-    common_activities = []
-    users.each do |user|
-      unless (user.activities & current_user.activities).empty?
-        common_activities << user
+    # 2 - Filter by activity if parameter provided by user
+    if current_user_activities_name.empty? == false
+      @users_matching_1 = []
+      users.each do |user|
+        user_activities_name = []
+        user.activities.each do |activity|
+          user_activities_name << activity.name
+        end
+        if user_activities_name.any? {|activity| current_user_activities_name.include?(activity) }
+          @users_matching_1 << user
+        end
       end
+      @users_matching = @users_matching_1
     end
-    return common_activities
+
+    # 3 - Filter by fitness level if paramter provided by user
+    if user1.level_of_fitness != nil
+      @users_matching_2 = []
+      @users_matching.each do |user|
+        if (user.level_of_fitness == user1.level_of_fitness)
+          @users_matching_2 << user
+        end
+      end
+      @users_matching = @users_matching_2
+    end
+
+    # 4 - Filter by preffered gender
+   if user1.partner_gender_preference != nil
+      @users_matching_3 = []
+      @users_matching.each do |user|
+        user.gender == user1.partner_gender_preference ? @users_matching_3 << user : nil
+      end
+      @users_matching = @users_matching_3
+    end
   end
 
 end
