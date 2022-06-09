@@ -12,4 +12,5 @@ class MatchesController < ApplicationController
     @match.save!
     redirect_to users_path
   end
+
 end

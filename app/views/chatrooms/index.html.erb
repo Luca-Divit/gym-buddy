@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <div class="content-aligned py-3 container">
+      <h1>GymBuddy</h1>
+    </div>
+
+    <div class="container">
+      <%@chatrooms.each do |chatroom|%>
+        <hr>
+        <div class="notification d-flex justify-content-between">
+
+          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+          <div class="notification-content">
+            <p><small><%=chatroom.name%></small></p>
+            <p>matched on <%=chatroom.created_at%></p>
+          </div>
+
+          <div class="notification-actions">
+            <a href="#"><i class="far fa-trash-alt align-middle"></i></a>
+          </div>
+
+        </div>
+        <hr>
+      <%end%>
+    </div>
+
+    <%= render "shared/footer" %>
+</div>
+
+<
