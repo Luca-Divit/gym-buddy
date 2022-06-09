@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     users = User.all
     @users_matching = User.all
 
+
     # 1 - get current user data
     user1 = current_user
     address = user1.address #get the adress of the current user

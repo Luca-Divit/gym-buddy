@@ -10,14 +10,16 @@ export default class extends Controller {
     this.active.classList.add("showing")
     console.log("I am connected")
   }
-  slideup(event) {
+  slideup() {
     this.active.classList.remove("showing")
     this.active.nextElementSibling.classList.add("showing")
     //  console.log((this.sliderTarget).firstElementChild)
   }
 
   slidedown(event){
-    console.log(event)
+    this.active.classList.remove("showing")
+    this.active.nextElementSibling.classList.add("showing")
+    console.log(event);
   }
 
 // var slides = document.querySelectorAll('#slides .slide');
