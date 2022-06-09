@@ -53,9 +53,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @match = Match.new
-    @match.user_receiver_id = @user.id
-    @match.user_requester_id = current_user.id
-    @match.save!
+
   end
 end
