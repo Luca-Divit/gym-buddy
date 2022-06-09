@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :user_activities
   has_many :activities, through: :user_activities
+  has_many :requested_matches, class_name: "Match", foreign_key:"user_requester_id"
+  has_many :received_matches, class_name: "Match", foreign_key:"user_receiver_id"
   has_one_attached :photo
   has_many :matches
   # Include default devise modules. Others available are:

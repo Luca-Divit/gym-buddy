@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_08_110952) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_09_120125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_110952) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.bigint "match_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_chatrooms_on_match_id"
+  end
+
   create_table "matches", force: :cascade do |t|
     t.bigint "user_requester_id", null: false
     t.bigint "user_receiver_id", null: false
@@ -56,6 +64,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_110952) do
     t.datetime "updated_at", null: false
     t.index ["user_receiver_id"], name: "index_matches_on_user_receiver_id"
     t.index ["user_requester_id"], name: "index_matches_on_user_requester_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "user_activities", force: :cascade do |t|
@@ -82,8 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_110952) do
     t.integer "age"
     t.string "level_of_fitness"
     t.string "days_available", default: [], array: true
-    t.time "start_time"
-    t.time "end_time"
+    t.integer "start_time"
+    t.integer "end_time"
     t.string "partner_gender_preference"
     t.text "bio"
     t.float "latitude"
@@ -94,8 +112,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_110952) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chatrooms", "matches"
   add_foreign_key "matches", "users", column: "user_receiver_id"
   add_foreign_key "matches", "users", column: "user_requester_id"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "user_activities", "activities"
   add_foreign_key "user_activities", "users"
 end
