@@ -12,3 +12,6 @@ application.register("navbar", NavbarController)
 
 import SlideController from "./slide_controller.js"
 application.register("slide", SlideController)
+
+import TabsController from "./tabs_controller.js"
+application.register("tabs", TabsController)
