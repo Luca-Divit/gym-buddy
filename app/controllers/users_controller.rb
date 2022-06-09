@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index ]
 
+
   def index
     users = User.all
     @users_matching = User.all
+
 
     # 1 - get current user data
     user1 = current_user
@@ -48,11 +50,12 @@ class UsersController < ApplicationController
       end
       @users_matching = @users_matching_3
     end
-
   end
 
   def show
     @user = User.find(params[:id])
+  end
 
+  def setting
   end
 end

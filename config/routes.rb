@@ -12,5 +12,4 @@ Rails.application.routes.draw do
     end
     resources :matches, only: [ :index, :update, :create ]
   end
-
 end
