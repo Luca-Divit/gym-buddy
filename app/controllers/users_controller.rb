@@ -57,5 +57,6 @@ class UsersController < ApplicationController
   end
 
   def setting
+    @user = User.find(params[:id])
   end
 end
