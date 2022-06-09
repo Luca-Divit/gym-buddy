@@ -1,0 +1,47 @@
+
+
+.card-category {
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  width: 350px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.name{
+  text-decoration: underline;
+  text-decoration-color: #FFCE34;
+}
+
+.image-first-text{
+  padding-left: 20px;
+}
+
+.flex-gap{
+  flex-wrap: wrap;
+  gap: 280px;
+  padding-left: 30px;
+}
+
+.rounded-card{
+  border-radius: 15px;
+  background-color: #FFCE34;
+}
+
+.rounded-card p {
+  font-size: 16px;
+}
+
+
+
+
+.text-bottom p {
+  font-weight: bold;
+  font-size: 16px;
+}

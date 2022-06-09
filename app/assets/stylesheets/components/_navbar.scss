@@ -10,3 +10,13 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+
+.navbar-lewagon{
+  background-color: #FFCE34;
+  transition: 0.5s background-color ease;
+}
+
+.navbar-lewagon-change{
+  background-color: #F4F4F4 !important;
+}
