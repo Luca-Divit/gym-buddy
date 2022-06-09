@@ -3,6 +3,90 @@
     <div class="content-aligned py-3 container">
       <h1>GymBuddy</h1>
     </div>
+    <%# Start to write your code below %>
+
+    <div data-controller="tabs" class="tabs-container">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a data-tabs-target="tab" data-action="click->tabs#activeClass" class="nav-link active" aria-current="page" href="#">Your GymBuddies</a>
+        </li>
+        <li class="nav-item">
+          <a data-tabs-target="tab2" data-action="click->tabs#activeClass" class="nav-link" href="#">Pending requests</a>
+        </li>
+      </ul>
+      <div class="list-match-to-accept" data-tabs-target="content">
+        <ul>
+          <% if @my_gymbuddies %>
+            <% @my_gymbuddies.each do |match| %>
+              <% if current_user == match.user_requester %>
+                <div class="card-product my-4 me-1 border border-primary">
+                  <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+                  <div class="card-product-infos">
+                    <h2><%= match.user_receiver.first_name %></h2>
+                    <h6>I like:
+                      <% match.user_receiver.activities.each do |activity| %>
+                        <strong><%= activity.name %></strong>
+                      <% end %>
+                      <br>
+                      Preferred days:
+                      <% match.user_receiver.days_available.each do |day| %>
+                        <strong><%= day %></strong>
+                      <% end %>
+                      </h6>
+                  </div>
+                </div>
+              <% else %>
+                <div class="card-product my-4 me-1 border border-primary">
+                  <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+                  <div class="card-product-infos">
+                    <h2><%= match.user_requester.first_name %></h2>
+                    <h6>I like:
+                      <% match.user_requester.activities.each do |activity| %>
+                        <strong><%= activity.name %></strong>
+                      <% end %>
+                      <br>
+                      Preferred days:
+                      <% match.user_requester.days_available.each do |day| %>
+                        <strong><%= day %></strong>
+                      <% end %>
+                      </h6>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if @my_match_to_accept_real %>
+        <div class="list-match-accepted d-none" data-tabs-target="content2">
+          <ul>
+              <% @my_match_to_accept_real.each do |match| %>
+                <div class="card-product my-4 me-1 border border-primary">
+                  <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+                  <div class="card-product-infos">
+                    <h2><%= match.user_requester.first_name %></h2>
+                    <h6>I like:
+                      <% match.user_requester.activities.each do |activity| %>
+                        <strong><%= activity.name %></strong>
+                      <% end %>
+                      <br>
+                      Preferred days:
+                      <% match.user_requester.days_available.each do |day| %>
+                        <strong><%= day %></strong>
+                      <% end %>
+                    </h6>
+                  </div>
+                </div>
+                <div class="buttons d-flex justify-content-evenly">
+                  <%= link_to "<<Skip", user_match_path(match.user_requester, match, status: 2), data:{ turbo_method: :patch }, class: "btn btn-dark" %>
+                  <%= link_to "Connect", user_match_path(match.user_requester, match, status: 1), data:{ turbo_method: :patch }, class: "btn btn-primary" %>
+                </div>
+              <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
   </div>
   <%= render "shared/footer" %>
 </div>
