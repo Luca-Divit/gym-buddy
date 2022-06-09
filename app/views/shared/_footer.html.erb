@@ -1,7 +1,19 @@
 <div class="footer  bg-secondary">
   <div class="footer-links">
-    <a href="/users"><i class="fa-solid fa-house"></i></a>
-    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-    <a href="/users"><i class="fa-solid fa-user"></i></a>
+    <%= link_to users_path do %>
+      <i class="fa-solid fa-g"></i>
+    <% end %>
+    <%= link_to users_path do %>
+      <i class="fa-solid fa-map-location-dot"></i>
+    <% end %>
+    <%= link_to user_matches_path do %>
+      <i class="fa-solid fa-dumbbell"></i>
+    <% end %>
+    <%= link_to users_path do %>
+      <i class="fa-solid fa-message"></i>
+    <% end %>
+    <%= link_to setting_user_path do %>
+      <i class="fa-solid fa-id-card"></i>
+    <% end %>
   </div>
 </div>
