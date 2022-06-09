@@ -3,13 +3,8 @@
 .card-category {
   background-size: cover;
   background-position: center;
-  height: 800px;
+  height: 600px;
   width: 350px;
-
-
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -21,22 +16,21 @@
 
 .flex-gap{
   flex-wrap: wrap;
-  gap: 450px;
+  gap: 280px;
   padding-left: 30px;
 }
 
-.card-bottom-icon p{
+.rounded-card{
+  border-radius: 15px;
+  background-color: #FFCE34;
+}
+
+.rounded-card p {
   font-size: 16px;
 }
 
-.card-bottom-icon i {
-  color: #FFCE34;
-}
 
-.card p {
-  font-weight: normal;
-  font-size: 16px;
-}
+
 
 .text-bottom p {
   font-weight: bold;
