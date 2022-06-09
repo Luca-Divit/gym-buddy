@@ -1,12 +1,8 @@
 class MatchesController < ApplicationController
-  # def create
-  #   @match = Match.new
-  #   @user_receiver = User.find(params[:id])
-  #   @match.user_receiver_id = @user_receiver.id
-  #   @match.user_requester_id = current_user.id
-  #   @match.save!
-  #   redirect_to '/', status: :see_others
-  # end
+  def index
+    @my_match_accepted = Match.where(user_requester_id: current_user.id)
+    @my_match_to_accept = Match.where(user_receiver_id: current_user.id)
+  end
 
   def create
     @match = Match.new
@@ -16,10 +12,4 @@ class MatchesController < ApplicationController
     @match.save!
     redirect_to users_path
   end
-
-  # def update
-  #   redirect_to users_path
-  # end
-
-
 end

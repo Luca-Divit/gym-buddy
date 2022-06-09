@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     member do
       get :setting
     end
-    resources :matches, only: [ :update, :create ]
+    resources :matches, only: [ :index, :update, :create ]
   end
 end
