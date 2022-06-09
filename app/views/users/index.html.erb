@@ -7,7 +7,7 @@
   <div>
   <% @users_matching.each do |user| %>
     <%= link_to user_path(user), class: "link" do %>
-      <div class="card-category mt-3 mb-4 mx-auto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('<%= cl_image_path user.photo.key%>');">
+      <div class="card-category mt-3 mb-4 mx-auto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));">
         <div class=" d-flex flex-gap">
           <div class="name pt-5" style= "font-weight: bolder; color: white">
             <h2>
