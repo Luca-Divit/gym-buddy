@@ -1,39 +1,36 @@
-<%# <div class="wrapper d-flex flex-column justify-content-between"> %>
-
-
-  <div>
-    <div class="content-aligned py-3 container">
-      <h1>GymBuddy</h1>
-    </div>
-    <div class="container">
-      <% @users_matching.each do |user| %>
-      <div>
-        <%= link_to user_path(user), class: "link" do %>
-          <div class="card-category mt-3 mb-4 mx-auto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('');">
-            <div class=" d-flex flex-gap mb-5">
-              <div class="name pt-5" style= "font-weight: bolder; color: white">
-                <h2>
-                  <%= user.first_name %> <%= user.age %>
-                </h2>
-              </div>
-              <div class="card rounded-card" style="width: 18rem; color:black;">
-                <div class="card-body">
-                  <p>Gender: <%= user.gender %></p>
-                  <p>Level of fitness: <%= user.level_of_fitness%></p>
-                  <p>Partner preference: <%= user.partner_gender_preference%></p>
-                  <p>Days available: <% user.days_available.each do |day| %>
-                      <%= day %>
-                    <% end %>
-                  </p>
-
-                </div>
+<div class="wrapper d-flex flex-column justify-content-between">
+  <div class="content-aligned py-3 container">
+    <h1>GymBuddy</h1>
+  </div>
+  <div class="container blacked pb-5">
+    <% @users_matching.each do |user| %>
+      <%= link_to user_path(user), class: "link" do %>
+      <% if user.photos.first %>
+        <div class="card-category mt-3 mb-4 mx-auto border" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('<%= cl_image_path user.photos.first.key%>');">
+      <% end %>
+          <div class=" d-flex flex-gap">
+            <div class="name pt-5" style= "font-weight: bolder; color: white">
+              <h2>
+                <%= user.first_name %> <%= user.age %>
+              </h2>
+            </div>
+            <div class="card rounded-card" style="width: 18rem; color:black;">
+              <div class="card-body">
+                <p>Gender: <%= user.gender %></p>
+                <p>Level of fitness: <%= user.level_of_fitness%></p>
+                <p>Partner preference: <%= user.partner_gender_preference%></p>
+                <p>Days available:
+                  <% user.days_available.each do |day| %>
+                    <%= day %>
+                  <% end %>
+                </p>
               </div>
             </div>
-          <% end %>
-        <% end %>
+          </div>
         </div>
-      </div>
-      <%= render "shared/footer" %>
-    </div>
+      <% end %>
+    <% end %>
+  <%= render "shared/footer" %>
+
   </div>
 <%# </div> %>
