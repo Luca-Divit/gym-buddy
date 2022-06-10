@@ -1,46 +1,39 @@
-
-
-<div class="wrapper d-flex flex-column justify-content-between">
-  <div class="container ">
-    <div class="content-aligned py-3 container">
-      <h1>GymBuddy</h1>
-    </div>
-    <%# Start to write your code below %>
-    <div class="row">
-      <div class="col-sm">
-        <div class="content-aligned py-2">
-          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <%= image_tag "boxing.jpg", alt: "Boxing", class: "d-block w-100" %>
-              </div>
-              <div class="carousel-item">
-                <%= image_tag "running.jpg", alt: "Running", class: "d-block w-100" %>
-              </div>
-              <div class="carousel-item">
-                <%= image_tag "box-jump.jpg", alt: "Box jump", class: "d-block w-100" %>
-              </div>
+<div class="wrapper d-flex flex-column justify-content-evenly">
+  <div class="content-aligned py-3">
+    <h1>GymBuddy</h1>
+  </div>
+  <%# Start to write your code below %>
+  <div class="row">
+    <div class="col-sm">
+      <div class="content-aligned">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <%= image_tag "boxing.jpg", alt: "Boxing", class: "d-block w-100" %>
+            </div>
+            <div class="carousel-item">
+              <%= image_tag "running.jpg", alt: "Running", class: "d-block w-100" %>
+            </div>
+            <div class="carousel-item">
+              <%= image_tag "box-jump.jpg", alt: "Box jump", class: "d-block w-100" %>
             </div>
           </div>
         </div>
-        <div class="content-aligned py-3 border-bottom border-primary border-2">
-          <h2>Find someone to train with, get Fitter and Healthier together.</h2>
-        </div>
-        <div class="content-aligned py-3 border-bottom border-primary border-2">
-          <p>
-            Feel unmotivated no more,
-            join today! grab your buddy
-            and let's go smash it!
-          </p>
-        </div>
-        <div class="content-aligned py-3">
-          <%= link_to "Sign up!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-        </div>
-        <div class="content-aligned py-2">
-          <p>
-            Already have an account? <strong><%= link_to "Sign in", new_user_session_path, class: "text-decoration-none", style: "color:white;" %></strong>
-          </p>
-        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="content-aligned py-3 border-bottom border-top border-primary border-2">
+        <h2>Find someone to train with, get Fitter and Healthier together.</h2>
+      </div>
+      <div class="content-aligned py-3 mt-5">
+        <%= link_to "Sign up!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+      </div>
+      <div class="content-aligned py-2">
+        <p>
+          Already have an account? <strong><%= link_to "Sign in", new_user_session_path, class: "text-decoration-none", style: "color:white;" %></strong>
+        </p>
       </div>
     </div>
   </div>

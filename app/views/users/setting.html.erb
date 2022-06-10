@@ -1,6 +1,7 @@
 <div class="wrapper">
   <div class="container text-center pt-4">
-  <div class = "pt-4 d-flex justify-content-around align-items-center">
+  <h1>GymBuddy</h1>
+  <div class = "pt-4 mb-4 d-flex justify-content-around align-items-center">
     <div>
     <% if @user.photos.first %>
       <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
@@ -40,7 +41,7 @@
           <div class="container mb-3">
             <%= simple_form_for @user do |f| %>
               <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
-              <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'], wrapper: :horizontal_collection_inline %>
+              <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediate', 'Advanced'], wrapper: :horizontal_collection_inline %>
               <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>

@@ -2,10 +2,14 @@
   <div class="content-aligned py-3 container">
     <h1>GymBuddy</h1>
   </div>
-  <div class="container">
+  <div class="container blacked pb-5">
     <% @users_matching.each do |user| %>
       <%= link_to user_path(user), class: "link" do %>
-        <div class="card-category mt-3 mb-4 mx-auto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('');">
+        <% if user.photos.first %>
+          <div class="card-category mt-3 mb-4 mx-auto border" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('<%= cl_image_path user.photos.first.key%>');">
+        <% else %>
+          <div class="card-category mt-3 mb-4 mx-auto border" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU');">
+        <% end %>
           <div class=" d-flex flex-gap">
             <div class="name pt-5" style= "font-weight: bolder; color: white">
               <h2>
@@ -17,17 +21,16 @@
                 <p>Gender: <%= user.gender %></p>
                 <p>Level of fitness: <%= user.level_of_fitness%></p>
                 <p>Partner preference: <%= user.partner_gender_preference%></p>
-                <p>Days available: <% user.days_available.each do |day| %>
+                <p>Days available:
+                  <% user.days_available.each do |day| %>
                     <%= day %>
                   <% end %>
                 </p>
-
               </div>
             </div>
           </div>
-        <% end %>
+        </div>
       <% end %>
-    </div>
-    <%= render "shared/footer" %>
-  </div>
+    <% end %>
+  <%= render "shared/footer" %>
 </div>

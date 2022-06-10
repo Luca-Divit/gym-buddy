@@ -82,9 +82,9 @@ class UsersController < ApplicationController
       params["user"]["activity_ids"].shift
       params["user"]["activity_ids"].each do |id|
         if Activity.find(id.to_i)
-          @user.activities << Activity.find(id.to_i)
-        end
+         @user.activities << Activity.find(id.to_i)
       end
+    end
     else
       @user.update(user_params)
     end
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :gender, :address, :days_available, :level_of_fitness, :bio, photos: [],
+    params.require(:user).permit(:first_name, :last_name, :gender, :address, :level_of_fitness,:bio, days_available: [], photos: [],
                                  user_activities_attributes: [:activity_ids => []])
   end
 end
