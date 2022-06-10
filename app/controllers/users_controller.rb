@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [ :index ]
+  before_action :authenticate_user!, only: [ :index, :show, :setting, :update ]
 
   def index
     # 1 - Setting the factbase
@@ -72,5 +72,29 @@ class UsersController < ApplicationController
   end
 
   def setting
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    UserActivity.where(user: @user).each { |activity| UserActivity.destroy(activity.id) }
+    if params["user"]["activity_ids"]
+      params["user"]["activity_ids"].shift
+      params["user"]["activity_ids"].each do |id|
+        if Activity.find(id.to_i)
+          @user.activities << Activity.find(id.to_i)
+        end
+      end
+    else
+      @user.update(user_params)
+    end
+
+    redirect_to setting_user_path(@user)
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :gender, :address, :days_available, :level_of_fitness, :bio, photos: [],
+                                 user_activities_attributes: [:activity_ids => []])
   end
 end
