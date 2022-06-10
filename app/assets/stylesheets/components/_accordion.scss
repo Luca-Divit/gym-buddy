@@ -1,0 +1,21 @@
+#accordionExample .accordion-item {
+  background-color: black !important;
+  color: white !important ;
+}
+
+.accordion #accordionExample {
+  background-color: black !important;
+}
+
+.accordion-item:first-of-type .accordion-button {
+  border-radius: 5px;
+}
+
+.accordion-button {
+  border-radius: 5px;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
