@@ -37,7 +37,7 @@
                 </div>
               <% else %>
                 <div class="card-product my-4 me-1 border border-primary">
-                  <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+                  <%= cl_image_tag @user.photos.first.key, alt: "user image", id: "image" %>
                   <div class="card-product-infos">
                     <h2><%= match.user_requester.first_name %></h2>
                     <h6>I like:
