@@ -1,4 +1,5 @@
 require 'faker'
+require "open-uri"
 Faker::Config.locale = 'en-GB'
 
 UserActivity.delete_all
@@ -23,10 +24,15 @@ puts "start creating users"
   start_time1 = rand(5..23).to_i
   end_time1 = start_time1.to_i + rand(1..4).to_i
   gender = ["male","female"].sample.to_s
-  user = User.create!(
+  if gender == "male"
+    file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870356/gym-buddy-males/#{rand(2..20)}.jpg")
+  else
+    file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870284/Gym-buddy-females/#{rand(1..9)}.jpg")
+  end
+  user = User.new(
     email: Faker::Internet.email,
     password: "123456",
-    first_name: Faker::Name."#{gender}".first_name,
+    first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     gender: gender,
     address: "London",
@@ -38,6 +44,8 @@ puts "start creating users"
     partner_gender_preference: ["Male","Female","Flexible"].sample,
     bio: ["Pain is temporary, pride is forever","Shut up and squat!","Forget the glass slippers, princess wear running shoes","Gym is my therapy.","Work. Train. Repeat.","Work hard now, selfie later.","Fit and Fat differ by middle alphabet.","I’m in a good place right now, not emotionally, I am just at the gym.","No pain, no gain. Shut up and train","Change your body by changing your thoughts.","Eat, sleep , gym , repeat." ].sample,
   )
+  user.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+  user.save
 end
 users = User.all
 
