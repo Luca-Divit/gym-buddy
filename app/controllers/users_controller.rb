@@ -67,9 +67,9 @@ class UsersController < ApplicationController
       params["user"]["activity_ids"].shift
       params["user"]["activity_ids"].each do |id|
         if Activity.find(id.to_i)
-          @user.activities << Activity.find(id.to_i)
-        end
+         @user.activities << Activity.find(id.to_i)
       end
+    end
     else
       @user.update(user_params)
     end
