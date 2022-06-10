@@ -1,7 +1,13 @@
 <div class="wrapper">
   <div class="container text-center pt-4">
-    <h1>Update my profile</h1>
-    <%# <%= cl_image_tag @user.photo.key, class: "avatar-large", alt: "avatar-large" %>
+  <div class = "pt-4 d-flex justify-content-around align-items-center">
+    <div>
+      <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+    </div>
+    <div>
+      <h2 style= "color: #F4F4F4">My profile</h2>
+    </div>
+  </div>
   <div class="accordion .accordion-flush pt-3 " id="accordionExample">
     <div class="accordion-item mb-3">
       <h2 class="accordion-header" id="headingTwo">
@@ -33,7 +39,7 @@
             <%= simple_form_for @user do |f| %>
               <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
               <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'], wrapper: :horizontal_collection_inline %>
-              <%= f.button :submit, class: "btn btn-primary " %>
+              <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
         </div>
@@ -64,21 +70,32 @@
         <div class="accordion-body">
           <div class="container mb-3">
             <%= simple_form_for [@user] do |f| %>
-              <%= f.association :activities, as: :check_boxes %>
-              <%= f.button :submit, class: "btn btn-primary " %>
+            <%= f.association :activities, as: :check_boxes %>
+            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
     <div class="accordion-item mb-3">
-      <h2 class="accordion-header" id="headingSix">
-        <button class="accordion-button collapsed" type="button" >
-          <i class="fa-solid fa-arrow-right-from-bracket" style= "padding-right:10px"></i>  Log Out
+      <h2 class="accordion-header" id="headingSeven">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+        <i class="fa-solid fa-images" style= "padding-right:10px"></i>  Add Photos
         </button>
       </h2>
+      <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <div class="container mb-3">
+            <%= simple_form_for [@user] do |f| %>
+            <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete},, class: "btn btn-flat btn-primary btn-lg w-100"  %>
+  <%= render "shared/footer" %>
   </div>
 </div>
-<%= render "shared/footer" %>
