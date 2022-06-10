@@ -62,7 +62,18 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(user_params)
+    UserActivity.where(user: @user).each { |activity| UserActivity.destroy(activity.id) }
+    if params["user"]["activity_ids"]
+      params["user"]["activity_ids"].shift
+      params["user"]["activity_ids"].each do |id|
+        if Activity.find(id.to_i)
+          @user.activities << Activity.find(id.to_i)
+        end
+      end
+    else
+      @user.update(user_params)
+    end
+
     redirect_to setting_user_path(@user)
   end
 
@@ -71,5 +82,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :gender, :address, :days_available, :level_of_fitness, :bio, photos: [],
                                  user_activities_attributes: [:activity_ids => []])
   end
-
 end
