@@ -2,7 +2,9 @@
   <div class="container text-center pt-4">
   <div class = "pt-4 d-flex justify-content-around align-items-center">
     <div>
+    <% if @user.photos.first %>
       <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+    <% end %>
     </div>
     <div>
       <h2 style= "color: #F4F4F4">My profile</h2>
@@ -95,7 +97,7 @@
       </div>
     </div>
   </div>
-  <%= link_to "Log out", destroy_user_session_path, data:{ turbo_method: :delete }, class: "btn btn-flat btn-primary btn-lg w-100"  %>
+  <%= link_to "Log out", destroy_user_session_path, data:{ turbo_method: :delete }, class: "btn btn-flat btn-primary btn-lg w-100" %>
   <%= render "shared/footer" %>
   </div>
 </div>
