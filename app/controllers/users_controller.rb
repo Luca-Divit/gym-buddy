@@ -57,5 +57,19 @@ class UsersController < ApplicationController
   end
 
   def setting
+    @user = current_user
   end
+
+  def update
+    @user = current_user
+    @user.update(user_params)
+    redirect_to setting_user_path(@user)
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :gender, :address, :days_available, :level_of_fitness, :bio, photos: [],
+                                 user_activities_attributes: [:activity_ids => []])
+  end
+
 end
