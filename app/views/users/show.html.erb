@@ -11,7 +11,9 @@
     </div>
     <div class="card-group">
       <div class="card">
-        <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+        <% if @user.photos.first %>
+          <%= cl_image_tag @user.photos.first.key, alt: "user image", id: "image" %>
+        <% end %>
         <div id="card" class="card-body">
           <h5 class="card-title"><%= @user.address %>, <%= @user.age %>, <%= @user.level_of_fitness%></h5>
           <h6>I like:
