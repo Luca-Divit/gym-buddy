@@ -22,8 +22,8 @@
           <%= simple_form_for @user do |f| %>
             <%= f.input :first_name %>
             <%= f.input :last_name %>
-            <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'] %>
             <%= f.input :address %>
+            <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], wrapper: :horizontal_collection_inline %>
             <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
           <% end %>
         </div>
@@ -72,8 +72,8 @@
         <div class="accordion-body">
           <div class="container mb-3">
             <%= simple_form_for [@user] do |f| %>
-            <%= f.association :activities, as: :check_boxes %>
-            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
+            <%= f.association :activities, as: :check_boxes, label_html: {class: "text-warning"} %>
+            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>
