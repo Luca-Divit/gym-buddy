@@ -22,12 +22,13 @@ puts "start creating users"
 40.times do
   start_time1 = rand(5..23).to_i
   end_time1 = start_time1.to_i + rand(1..4).to_i
+  gender = ["male","female"].sample.to_s
   user = User.create!(
     email: Faker::Internet.email,
     password: "123456",
-    first_name: Faker::Name.first_name,
+    first_name: Faker::Name."#{gender}".first_name,
     last_name: Faker::Name.last_name,
-    gender: Faker::Gender.binary_type.to_s,
+    gender: gender,
     address: "London",
     age: rand(15..50).to_i,
     level_of_fitness: ["Beginner","Intermediate","Advanced"].sample.to_s,

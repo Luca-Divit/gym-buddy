@@ -19,6 +19,9 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @match.status = params[:status].to_i
     @match.save!
+    if @match.status == 1
+      @chatroom = Chatroom.create(match_id: @match.id, name: @match.user_receiver.first_name)
+    end
     redirect_back(fallback_location: root_path)
   end
 end
