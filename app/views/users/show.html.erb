@@ -13,6 +13,8 @@
       <div class="card">
         <% if @user.photos.first %>
           <%= cl_image_tag @user.photos.first.key, alt: "user image", id: "image" %>
+        <% else %>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
         <% end %>
         <div id="card" class="card-body">
           <h5 class="card-title"><%= @user.address %>, <%= @user.age %>, <%= @user.level_of_fitness%></h5>
