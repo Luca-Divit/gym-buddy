@@ -1,5 +1,10 @@
 .wrapper {
   background-color: $black;
   color: $white;
-  height: 100%;
+  height: 100vh;
+}
+
+.blacked {
+  background-color: $black;
+  color: $white;
 }
