@@ -100,8 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_120125) do
     t.integer "age"
     t.string "level_of_fitness"
     t.string "days_available", default: [], array: true
-    t.integer "start_time"
-    t.integer "end_time"
+    t.time "start_time"
+    t.time "end_time"
     t.string "partner_gender_preference"
     t.text "bio"
     t.float "latitude"
