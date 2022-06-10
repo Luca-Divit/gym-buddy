@@ -49,6 +49,7 @@
                       <% match.user_requester.days_available.each do |day| %>
                         <strong><%= day %></strong>
                       <% end %>
+                      <%# <%= link_to "Chat", users_match_chatroom_path(current_user.id, match.id, match.chatrooms.ids), class: "btn btn-primary" %> %>
                       </h6>
                   </div>
                 </div>
