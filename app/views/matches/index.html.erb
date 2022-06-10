@@ -20,7 +20,11 @@
             <% @my_gymbuddies.each do |match| %>
               <% if current_user == match.user_requester %>
                 <div class="card-product my-4 me-1 border border-primary">
-                  <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+                  <% if match.user_receiver.photos.first %>
+                    <%= cl_image_tag match.user_receiver.photos.first.key, alt: "user image", id: "image" %>
+                  <% else %>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                  <% end %>
                   <div class="card-product-infos">
                     <h2><%= match.user_receiver.first_name %></h2>
                     <h6>I like:
@@ -37,7 +41,11 @@
                 </div>
               <% else %>
                 <div class="card-product my-4 me-1 border border-primary">
-                  <%= cl_image_tag @user.photos.first.key, alt: "user image", id: "image" %>
+                  <% if match.user_requester.photos.first %>
+                    <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                  <% else %>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                  <% end %>
                   <div class="card-product-infos">
                     <h2><%= match.user_requester.first_name %></h2>
                     <h6>I like:
@@ -49,7 +57,6 @@
                       <% match.user_requester.days_available.each do |day| %>
                         <strong><%= day %></strong>
                       <% end %>
-                      <%# <%= link_to "Chat", users_match_chatroom_path(current_user.id, match.id, match.chatrooms.ids), class: "btn btn-primary" %> %>
                       </h6>
                   </div>
                 </div>
@@ -64,7 +71,11 @@
           <ul>
               <% @my_match_to_accept_real.each do |match| %>
                 <div class="card-product my-4 me-1 border border-primary">
-                  <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
+                <% if match.user_requester.photos.first %>
+                  <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                <% else %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                <% end %>
                   <div class="card-product-infos">
                     <h2><%= match.user_requester.first_name %></h2>
                     <h6>I like:
