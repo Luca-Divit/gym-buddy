@@ -7,4 +7,5 @@ class Match < ApplicationRecord
 
   belongs_to :user_requester, class_name: 'User'
   belongs_to :user_receiver, class_name: 'User'
+  has_many :chatrooms
 end

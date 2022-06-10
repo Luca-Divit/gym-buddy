@@ -1,30 +1,44 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index ]
 
-
   def index
-    users = User.all
-    @users_matching = User.all
-
-
-    # 1 - get current user data
+    # 1 - Setting the factbase
+    @users = User.all
+    @users_matching = []
     user1 = current_user
-    address = user1.address #get the adress of the current user
 
+    #removes the current user from the sample so they do not show up on the index page
+    @users.each do |user|
+      if (user != user1)
+        @users_matching << user
+      end
+    end
+
+    #remove users that have already sent me a request
+    user1.received_matches.each do |user|
+      @users_matching.delete(user)
+    end
+
+    #remove users that I have already sent a request
+    user1.requested_matches.each do |user|
+      @users_matching.delete(user)
+    end
+
+
+    # 2 - Filter by activity if parameter provided by user
     current_user_activities_name = [] # get the activities of the current user if they exists
     user1.activities.each do |activity|
       current_user_activities_name << activity.name
     end
 
-    # 2 - Filter by activity if parameter provided by user
     if current_user_activities_name.empty? == false
       @users_matching_1 = []
-      users.each do |user|
+      @users_matching.each do |user|
         user_activities_name = []
         user.activities.each do |activity|
           user_activities_name << activity.name
         end
-        if user_activities_name.any? {|activity| current_user_activities_name.include?(activity) }
+        if user_activities_name.any? {|activity| current_user_activities_name.include?(activity)}
           @users_matching_1 << user
         end
       end
@@ -46,10 +60,11 @@ class UsersController < ApplicationController
    if user1.partner_gender_preference != nil
       @users_matching_3 = []
       @users_matching.each do |user|
-        user.gender == user1.partner_gender_preference ? @users_matching_3 << user : nil
+        (user.gender == user1.partner_gender_preference && user1.gender == user.partner_gender_preference)? @users_matching_3 << user : nil
       end
       @users_matching = @users_matching_3
     end
+
   end
 
   def show
