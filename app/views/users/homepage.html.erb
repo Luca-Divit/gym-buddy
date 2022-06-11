@@ -1,0 +1,52 @@
+<div class="container mt-5" style= "background-color:#222222; color:#FFFFFF">
+  <div class = "d-flex justify-content-between align-items-center">
+    <div>
+      <h2>Hi, <%= @user.first_name %>!<i class="fa-solid fa-hands-clapping"></i></h2>
+      <p>What are you looking for today?</p>
+    </div>
+    <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+  </div>
+
+  <div class = "d-flex justify-content-between mt-5">
+    <div>
+      <h5>Browse Matches</h5>
+    </div>
+    <div>
+      <p>View all</p>
+    </div>
+  </div>
+  <div class="scrolling-wrapper-flexbox">
+    <% @users_five.each do |user| %>
+    <div class="cards">
+      <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+        <div style = "padding-left:8px;">
+          <div style="margin-bottom:8rem;">
+            <br><p class= "scroll-name text-center"><%= user.first_name%></p>
+          </div>
+          <div>
+          <h2><%= user.address%></h2>
+           <p><%= user.age %> Fitness:<%= user.level_of_fitness %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class = "d-flex justify-content-between mt-5">
+    <div>
+      <h5>Similar activities</h5>
+    </div>
+    <div>
+      <p>View all</p>
+    </div>
+  </div>
+  <% @users_five.each do |user| %>
+    <div class = "activity-card mb-3">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg" alt="">
+      <div>
+        <h2>My card here</h2>
+      </div>
+    </div>
+  <% end %>
+
+</div>

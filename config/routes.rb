@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     member do
       get :setting
     end
+    collection do
+      get :homepage
+    end
     resources :matches, only: [ :index, :update, :create ] do
       resources :chatrooms, only:[:create,:show ]
     end

@@ -92,6 +92,12 @@ class UsersController < ApplicationController
     redirect_to setting_user_path(@user)
   end
 
+  def homepage
+    @user = current_user
+    @users = User.all
+    @users_five = @users.sample(5)
+  end
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :gender, :address, :level_of_fitness,:bio, days_available: [], photos: [],
