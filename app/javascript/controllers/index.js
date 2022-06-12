@@ -10,6 +10,9 @@ application.register("hello", HelloController)
 import NavbarController from "./navbar_controller.js"
 application.register("navbar", NavbarController)
 
+import RequestController from "./request_controller.js"
+application.register("request", RequestController)
+
 import SlideController from "./slide_controller.js"
 application.register("slide", SlideController)
 

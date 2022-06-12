@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [ :index, :show, :setting, :update ]
+  before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
 
   def index
     # 1 - Setting the factbase
