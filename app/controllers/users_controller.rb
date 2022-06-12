@@ -69,6 +69,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @users = User.all
+    @users_five = @users.sample(5)
   end
 
   def setting

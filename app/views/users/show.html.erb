@@ -1,41 +1,66 @@
-<div class="wrapper d-flex flex-column justify-content-between">
-  <div class="container ">
-    <div class="content-aligned py-3 container">
-      <h1>GymBuddy</h1>
+<div class="container" style= "background-color:#222222; color:#FFFFFF">
+  <div class = "mb-4 pt-4 d-flex justify-content-between">
+    <div><span class="fa-stack fa-2x" style = "font-size: 16px">
+      <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+      <i class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
+      </span>
     </div>
-    <div class="name mb-3">
-      <h2>Hi !
-        <br>
-        I'm <%= @user.first_name %>
-      </h2>
+    <div>
+      <h1 class="text-center"><%= @user.first_name %></h1>
+      <p>Fitness Level: <%= @user.level_of_fitness %></p>
     </div>
-    <div class="card-group">
-      <div class="card">
-        <%= image_tag "kelly.jpg", alt: "user image", id: "image" %>
-        <div id="card" class="card-body">
-          <h5 class="card-title"><%= @user.address %>, <%= @user.age %>, <%= @user.level_of_fitness%></h5>
-          <h6>I like:
-            <% @user.activities.each do |activity| %>
-              <strong><%= activity.name %></strong>
-            <% end %>
-            <br>
-            Preferred days:
-            <% @user.days_available.each do |day| %>
-              <strong><%= day %></strong>
-            <% end %>
-            <br>
-            Between <strong><%= @user.start_time %></strong> & <strong><%= @user.end_time %></strong>
-          </h6>
-        </div>
-      </div>
-    </div>
-    <div class="bio">
-      <p>Bio : <%= @user.bio %></p>
-    </div>
-    <div class="buttons d-flex justify-content-evenly">
-      <%= link_to "<<Skip", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 2), data:{ turbo_method: :post }, class: "btn btn-dark" %>
-      <%= link_to "Connect", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary" %>
+    <div><span class="fa-stack fa-2x" style = "font-size: 16px">
+      <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+      <i class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse"></i>
+      </span>
     </div>
   </div>
-  <%= render "shared/footer" %>
+  <div class = "show-img text-center mb-4">
+    <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
+  </div>
+  <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
+  <p><span>My Bio:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quidem placeat aliquam nisi ducimus? Molestiae omnis ducimus dolores officia, tempore ipsum, ad dignissimos minus, nobis adipisci fuga. Perspiciatis, assumenda voluptate.</p>
+  <p><span style=" padding-right:6px">Prefer to train with:</span> <%= @user.partner_gender_preference %> </p>
+  <div>
+    <div>
+      <p class= "text-center" style= "margin-bottom:6px;">My activities
+    </div>
+    <ul class= "list-item" style= "padding-left: 0px">
+      <% @user.activities.each do |activities| %>
+      <li><%= activities.name.capitalize %></li>
+    <% end %>
+    </ul></p>
+  </div>
+  <div>
+    <p class= "text-center" style= "margin-bottom:6px;">I am available
+  <ul class= "list-item" style= "padding-left: 0px">
+      <% @user.days_available.each do |day| %>
+      <li><%= day %></li>
+    <% end %>
+  </ul></p>
+  </div>
+
+  <hr>
+  <div class = "mt-4 text-center">
+    <h5>You share similar activities</h5>
+    <div class="scrolling-wrapper-flexbox">
+      <% @users_five.each do |user| %>
+        <%= link_to user_path(user), class: "link" do %>
+          <div class="cards">
+            <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user.photos.first.key%>')">
+              <div style = "padding-left:8px;">
+                <div style="margin-bottom:8rem;">
+                  <br><p class= "scroll-name text-center"><%= user.first_name%></p>
+                </div>
+                <div>
+                <h4><span style="color:white"><%= user.address%></span></h4>
+                <p><span style="color:white">Fitness: <%= user.level_of_fitness %></span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>

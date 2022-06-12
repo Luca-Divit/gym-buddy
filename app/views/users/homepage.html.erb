@@ -1,7 +1,7 @@
-<div class="container mt-5" style= "background-color:#222222; color:#FFFFFF">
+<div class="container pt-5" style= "background-color:#222222; color:#FFFFFF">
   <div class = "d-flex justify-content-between align-items-center">
-    <div>
-      <h2>Hi, <%= @user.first_name %>!<i class="fa-solid fa-hands-clapping"></i></h2>
+    <div class = "homepage-name">
+      <h3>Hi, <%= @user.first_name %>!<i class="fa-solid fa-hands-clapping" style = "color:#FFCE34"></i></h3>
       <p>What are you looking for today?</p>
     </div>
     <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
@@ -9,44 +9,50 @@
 
   <div class = "d-flex justify-content-between mt-5">
     <div>
-      <h5>Browse Matches</h5>
+      <h6>Explore GymBuddies</h6>
     </div>
-    <div>
-      <p>View all</p>
+    <div class = "link-no-design">
+      <p><%= link_to "View all", users_path %></p>
     </div>
   </div>
   <div class="scrolling-wrapper-flexbox">
     <% @users_five.each do |user| %>
-    <div class="cards">
-      <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-        <div style = "padding-left:8px;">
-          <div style="margin-bottom:8rem;">
-            <br><p class= "scroll-name text-center"><%= user.first_name%></p>
-          </div>
-          <div>
-          <h2><%= user.address%></h2>
-           <p><%= user.age %> Fitness:<%= user.level_of_fitness %></p>
+      <%= link_to user_path(user), class: "link" do %>
+        <div class="cards">
+          <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user.photos.first.key%>')">
+            <div style = "padding-left:8px;">
+              <div style="margin-bottom:8rem;">
+                <br><p class= "scroll-name text-center"><%= user.first_name%></p>
+              </div>
+              <div>
+              <h4><span style="color:white"><%= user.address%></span></h4>
+              <p><span style="color:white">Fitness: <%= user.level_of_fitness %></span></p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      <% end %>
     <% end %>
   </div>
   <div class = "d-flex justify-content-between mt-5">
     <div>
-      <h5>Similar activities</h5>
+      <h6>You shared similar activities</h6>
     </div>
-    <div>
-      <p>View all</p>
+    <div class = "link-no-design">
+      <p><%= link_to "View all", users_path %></p>
     </div>
   </div>
   <% @users_five.each do |user| %>
     <div class = "activity-card mb-3">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg" alt="">
+      <img src="<%= cl_image_path user.photos.first.key%>" alt="">
       <div>
-        <h2>My card here</h2>
+        <h5><%= user.first_name %></h5>
+        <p>Available days:<% user.days_available.each do |day| %>
+          <%= day %>
+        <% end %></p>
+        <p>Age: <%= user.age %><span style="padding-left:12px"><%= link_to "See details", user_path(user) %></span></p>
       </div>
     </div>
   <% end %>
-
+<%= render "shared/footer" %>
 </div>
