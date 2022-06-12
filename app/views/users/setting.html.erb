@@ -24,7 +24,7 @@
             <%= f.input :first_name %>
             <%= f.input :last_name %>
             <%= f.input :address %>
-            <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], wrapper: :horizontal_collection_inline %>
+            <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
             <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
           <% end %>
         </div>
@@ -40,8 +40,9 @@
         <div class="accordion-body">
           <div class="container mb-3">
             <%= simple_form_for @user do |f| %>
-              <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
-              <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'], wrapper: :horizontal_collection_inline %>
+              <%# <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
+               <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
+              <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
               <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
@@ -73,7 +74,10 @@
         <div class="accordion-body">
           <div class="container mb-3">
             <%= simple_form_for [@user] do |f| %>
-            <%= f.association :activities, as: :check_boxes, label_html: {class: "text-warning"} %>
+            <%= f.association :activities,
+                  as: :check_boxes,
+                  input_html: { class: "tag-selector" },
+                  item_wrapper_class: 'tag-item' %>
             <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary" %>
             <% end %>
           </div>
