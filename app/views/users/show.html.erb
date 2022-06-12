@@ -8,8 +8,8 @@
     </div>
     <% end %>
     <div>
-      <h1 class="text-center"><%= @user.first_name %></h1>
-      <p>Level: <%= @user.level_of_fitness %></p>
+      <h3 class="text-center"><%= @user.first_name %>, <%= @user.age %></h3>
+      <p>Fitness Level: <%= @user.level_of_fitness %></p>
     </div>
     <div data-action="click->request#SendRequest"><span class="fa-stack fa-2x" style = "font-size: 16px">
       <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
@@ -22,28 +22,36 @@
     <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
   </div>
   <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
-  <p><span>My Bio:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quidem placeat aliquam nisi ducimus? Molestiae omnis ducimus dolores officia, tempore ipsum, ad dignissimos minus, nobis adipisci fuga. Perspiciatis, assumenda voluptate.</p>
+  <div>
+    <div class= "basic-info" style = "border-bottom:1px">
+      <h6>Basic information</h6>
+    </div>
+    <div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias vitae dolorem, accusantium voluptas deleniti veniam doloremque quidem ipsum perferendis ratione iure debitis ut error odio inventore pariatur, corporis quae. Odit.</p>
+    </div>
+  </div>
   <p><span style=" padding-right:6px">Prefer to train with:</span> <%= @user.partner_gender_preference %> </p>
+  <p><span style=" padding-right:6px">Location:</span> <%= @user.address %> </p>
   <% unless @user.activities.empty? %>
     <div>
       <div>
-        <p class= "text-center" style= "margin-bottom:6px;">My activities
+        <h6 class= "text-start" style= "margin-bottom:10px; font-size: bold">My activities</h6>
       </div>
       <ul class= "list-item" style= "padding-left: 0px">
         <% @user.activities.each do |activities| %>
-        <li><%= activities.name.capitalize %></li>
+          <span class = "show-list"><li><%= activities.name.capitalize %></li></span>
       <% end %>
-      </ul></p>
+      </ul>
     </div>
   <% end %>
   <% unless @user.days_available.empty? %>
     <div>
-      <p class= "text-center" style= "margin-bottom:6px;">I am available
+      <h6 class= "text-start" style= "margin-bottom:10px; font-size: bold">I am available</h6>
     <ul class= "list-item" style= "padding-left: 0px">
         <% @user.days_available.each do |day| %>
-        <li><%= day %></li>
+          <span class = "show-list"><li><%= day %></li></span>
       <% end %>
-    </ul></p>
+    </ul>
     </div>
   <% end %>
 
@@ -71,3 +79,4 @@
     </div>
   </div>
 </div>
+<%= render "shared/footer" %>
