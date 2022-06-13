@@ -12,7 +12,7 @@ class MatchesController < ApplicationController
     @match.user_requester_id = params[:user_requester_id]
     @match.status = params[:status].to_i
     @match.save!
-    redirect_to users_path
+    redirect_to homepage_users_path
   end
 
   def update

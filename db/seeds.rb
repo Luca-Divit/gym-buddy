@@ -44,7 +44,7 @@ puts "start creating users"
     partner_gender_preference: ["Male","Female","Flexible"].sample,
     bio: ["Pain is temporary, pride is forever","Shut up and squat!","Forget the glass slippers, princess wear running shoes","Gym is my therapy.","Work. Train. Repeat.","Work hard now, selfie later.","Fit and Fat differ by middle alphabet.","I’m in a good place right now, not emotionally, I am just at the gym.","No pain, no gain. Shut up and train","Change your body by changing your thoughts.","Eat, sleep , gym , repeat." ].sample,
   )
-  user.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+  user.photos.attach(io: file, filename: "nes.jpg", content_type: "image/jpg")
   user.save
 end
 users = User.all
