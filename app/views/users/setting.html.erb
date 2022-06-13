@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="container text-center pt-4">
   <h1>GymBuddy</h1>
-  <div class = "pt-4 d-flex justify-content-around align-items-center">
+  <div class = "pt-4 mb-4 d-flex justify-content-around align-items-center">
     <div>
     <% if @user.photos.first %>
       <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
