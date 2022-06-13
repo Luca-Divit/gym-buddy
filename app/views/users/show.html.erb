@@ -1,45 +1,89 @@
-<div class="wrapper d-flex flex-column justify-content-between">
-  <div class="container">
-    <div class="content-aligned py-3 container">
-      <h1>GymBuddy</h1>
+
+<%= render "shared/navbar" %>
+<div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 37px;" data-controller="request">
+  <div class = "mb-4 pt-4 d-flex justify-content-between">
+    <%= link_to homepage_users_path do %>
+    <div><span class="fa-stack fa-2x" style = "font-size: 16px">
+      <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+      <i class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
+      </span>
     </div>
-    <div class="name mb-3">
-      <h2>Hi !
-        <br>
-        I'm <%= @user.first_name %>
-      </h2>
+    <% end %>
+    <div>
+      <h3 class="text-center"><%= @user.first_name %>, <%= @user.age %></h3>
+      <p>Fitness Level: <%= @user.level_of_fitness %></p>
     </div>
-    <div class="card-group">
-      <div class="card">
-        <% if @user.photos.first %>
-          <%= cl_image_tag @user.photos.first.key, alt: "user image", id: "image" %>
-        <% else %>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
-        <% end %>
-        <div id="card" class="card-body">
-          <h5 class="card-title"><%= @user.address %>, <%= @user.age %>, <%= @user.level_of_fitness%></h5>
-          <h6>I like:
-            <% @user.activities.each do |activity| %>
-              <strong><%= activity.name %></strong>
-            <% end %>
-            <br>
-            Preferred days:
-            <% @user.days_available.each do |day| %>
-              <strong><%= day %></strong>
-            <% end %>
-            <br>
-            Between <strong><%= @user.start_time %></strong> & <strong><%= @user.end_time %></strong>
-          </h6>
-        </div>
-      </div>
+    <div data-action="click->request#SendRequest"><span class="fa-stack fa-2x" style = "font-size: 16px">
+      <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+      <i data-request-target="sendRequest" class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse send-request"></i>
+      </span>
     </div>
-    <div class="bio">
-      <p>Bio : <%= @user.bio %></p>
+
+  </div>
+  <div class = "show-img text-center mb-4">
+    <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
+  </div>
+  <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
+  <div>
+    <div class= "basic-info" style = "border-bottom:1px">
+      <h6>Basic information</h6>
     </div>
-    <div class="buttons d-flex justify-content-evenly">
-      <%= link_to "<<Skip", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 2), data:{ turbo_method: :post }, class: "btn btn-dark" %>
-      <%= link_to "Connect", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary" %>
+    <div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias vitae dolorem, accusantium voluptas deleniti veniam doloremque quidem ipsum perferendis ratione iure debitis ut error odio inventore pariatur, corporis quae. Odit.</p>
     </div>
   </div>
-  <%= render "shared/footer" %>
+  <p><span style=" padding-right:6px">Prefer to train with:</span> <%= @user.partner_gender_preference %> </p>
+  <p><span style=" padding-right:6px">Location:</span> <%= @user.address %> </p>
+  <% unless @user.activities.empty? %>
+    <div>
+      <div>
+        <h6 class= "text-start" style= "margin-bottom:10px; font-size: bold">My activities</h6>
+      </div>
+      <ul class= "list-item" style= "padding-left: 0px">
+        <% @user.activities.each do |activities| %>
+          <span class = "show-list"><li><%= activities.name.capitalize %></li></span>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% unless @user.days_available.empty? %>
+    <div>
+      <h6 class= "text-start" style= "margin-bottom:10px; font-size: bold">I am available</h6>
+    <ul class= "list-item" style= "padding-left: 0px">
+        <% @user.days_available.each do |day| %>
+          <span class = "show-list"><li><%= day %></li></span>
+      <% end %>
+    </ul>
+    </div>
+  <% end %>
+   <hr>
+
+  <div style="width: 100%; height: 300px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+  <div class = "mt-5 text-center">
+    <h5>You share similar activities</h5>
+    <div class="scrolling-wrapper-flexbox">
+      <% @users_five.each do |user| %>
+        <%= link_to user_path(user), class: "link" do %>
+          <div class="cards">
+            <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user.photos.first.key%>')">
+              <div style = "padding-left:8px;">
+                <div style="margin-bottom:8rem;">
+                  <br><p class= "scroll-name text-center"><%= user.first_name%></p>
+                </div>
+                <div>
+                <h4><span style="color:white"><%= user.address%></span></h4>
+                <p><span style="color:white">Fitness: <%= user.level_of_fitness %></span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
+<%= render "shared/footer" %>

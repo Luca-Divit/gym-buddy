@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [ :index, :show, :setting, :update ]
+  before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
 
   def index
     # 1 - Setting the factbase
@@ -69,6 +69,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @users = User.all
+    @users_five = @users.sample(5)
+    @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+    end
   end
 
   def setting
@@ -90,6 +98,12 @@ class UsersController < ApplicationController
     end
 
     redirect_to setting_user_path(@user)
+  end
+
+  def homepage
+    @user = current_user
+    @users = User.all
+    @users_five = @users.sample(5)
   end
 
   private

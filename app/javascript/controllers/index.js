@@ -7,8 +7,14 @@ import { application } from "./application"
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import MapController from "./map_controller.js"
+application.register("map", MapController)
+
 import NavbarController from "./navbar_controller.js"
 application.register("navbar", NavbarController)
+
+import RequestController from "./request_controller.js"
+application.register("request", RequestController)
 
 import SlideController from "./slide_controller.js"
 application.register("slide", SlideController)

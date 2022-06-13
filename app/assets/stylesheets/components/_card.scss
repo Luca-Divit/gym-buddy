@@ -8,6 +8,26 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
+.card-category-homepage{
+  margin-right: 10px;
+  height: 250px;
+  width: 200px;
+}
+
+.activity-card{
+  display: flex;
+  gap: 16px;
+}
+
+.activity-card img{
+  width: 125px;
+  border-radius: 15px;
+  height: 8rem;
+  object-fit: cover;
+  margin-top: 0px;
+}
+
+
 .link {
   text-decoration: none;
 }
