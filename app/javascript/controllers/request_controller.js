@@ -12,6 +12,7 @@ export default class extends Controller {
 
   }
 
+
   SendRequest(){
     // event.preventDefault()
     // const redirectPath = ("http://localhost:3000/users/homepage");
@@ -30,5 +31,6 @@ export default class extends Controller {
     // if (event.detail.success) {
     //   window.location.href = this.urlValue;
     // }
+
   }
 }

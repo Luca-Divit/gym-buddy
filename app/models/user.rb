@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :requested_matches, class_name: "Match", foreign_key: "user_requester_id"
   has_many :received_matches, class_name: "Match", foreign_key: "user_receiver_id"
   has_many :matches
+  has_many :notifications, as: :recipient
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

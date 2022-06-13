@@ -53,7 +53,11 @@
   </div>
   <% @users_matching.first(5).each do |user| %>
     <div class = "activity-card mb-3">
-      <img src="<%= cl_image_path user.photos.first.key%>" alt="">
+      <%= link_to user_path(user) do %>
+      <div>
+        <img src="<%= cl_image_path user.photos.first.key%>" alt="">
+      </div>
+      <% end %>
       <div>
         <h5><%= user.first_name %></h5>
         <p>Available days:<% user.days_available.each do |day| %>

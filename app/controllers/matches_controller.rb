@@ -10,6 +10,8 @@ class MatchesController < ApplicationController
     @match = Match.new
     @match.user_receiver_id = params[:user_receiver_id]
     @match.user_requester_id = params[:user_requester_id]
+    CommentNotification.with(message: "You sent a match request to #{User.find(@match.user_receiver_id).first_name}").deliver(current_user)
+    CommentNotification.with(message: "You recieved a match request from  #{User.find(@match.user_requester_id).first_name}").deliver(User.find(@match.user_receiver_id))
     @match.status = params[:status].to_i
     @match.save!
     redirect_to homepage_users_path
@@ -20,6 +22,7 @@ class MatchesController < ApplicationController
     @match.status = params[:status].to_i
     @match.save!
     if @match.status == 1
+      #the other guy accepted your request
       @chatroom = Chatroom.create(match_id: @match.id, name: @match.user_receiver.first_name)
     end
     redirect_back(fallback_location: root_path)
