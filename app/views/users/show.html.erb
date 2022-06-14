@@ -68,7 +68,7 @@
   <div class = "mt-5 text-center">
     <h5>You share similar activities</h5>
     <div class="scrolling-wrapper-flexbox">
-      <% @users_five.each do |user| %>
+      <% @users_matching.first(5).each do |user| %>
         <%= link_to user_path(user), class: "link" do %>
           <div class="cards">
             <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user.photos.first.key%>')">

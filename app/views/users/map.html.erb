@@ -1,0 +1,19 @@
+<div class="wrapper d-flex flex-column justify-content-between">
+  <div class="container ">
+    <div class="content-aligned py-3 container">
+      <h1>GymBuddy</h1>
+    </div>
+    <%# Start to write your code below %>
+    <div class="potential py-3">
+      <p>
+        Potential GymBuddies around you:
+      </p>
+    </div>
+    <div style="width: 100%; height: 600px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  </div>
+  <%= render "shared/footer" %>
+</div>

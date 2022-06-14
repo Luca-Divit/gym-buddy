@@ -1,15 +1,26 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
-  before_action :filtered_users, only: [ :index, :homepage ]
+  before_action :filtered_users, only: [ :index, :homepage, :map, :show, :map ]
 
   def index
   end
 
   def show
     @user = User.find(params[:id])
-    @users = User.all
-    @users_five = @users.sample(5)
-    @markers = @users.geocoded.map do |user|
+    @markers = [
+      {
+        lat: @user.latitude,
+        lng: @user.longitude
+      },
+      {
+        lat: current_user.latitude,
+        lng: current_user.longitude
+      }
+    ]
+  end
+
+  def map
+    @markers = @users_matching.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude
@@ -18,7 +29,6 @@ class UsersController < ApplicationController
   end
 
   def setting
-    @user = current_user
   end
 
   def update
@@ -28,13 +38,12 @@ class UsersController < ApplicationController
       params["user"]["activity_ids"].shift
       params["user"]["activity_ids"].each do |id|
         if Activity.find(id.to_i)
-         @user.activities << Activity.find(id.to_i)
+          @user.activities << Activity.find(id.to_i)
+        end
       end
-    end
     else
       @user.update(user_params)
     end
-
     redirect_to setting_user_path(@user)
   end
 
@@ -73,7 +82,6 @@ class UsersController < ApplicationController
     user1.requested_matches.each do |user|
       @users_matching.delete(user)
     end
-
 
     # 2 - Filter by activity if parameter provided by user
     current_user_activities_name = [] # get the activities of the current user if they exists
@@ -115,5 +123,4 @@ class UsersController < ApplicationController
       @users_matching = @users_matching_3
     end
   end
-
 end

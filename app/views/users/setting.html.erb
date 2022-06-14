@@ -3,8 +3,8 @@
   <h1>GymBuddy</h1>
   <div class = "pt-4 mb-4 d-flex justify-content-around align-items-center">
     <div>
-    <% if @user.photos.first %>
-      <%= cl_image_tag @user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+    <% if current_user.photos.first %>
+      <%= cl_image_tag current_user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
     <% end %>
     </div>
     <div>
@@ -20,7 +20,7 @@
       </h2>
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          <%= simple_form_for @user do |f| %>
+          <%= simple_form_for current_user do |f| %>
             <%= f.input :first_name %>
             <%= f.input :last_name %>
             <%= f.input :address %>
@@ -39,7 +39,7 @@
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <div class="container mb-3">
-            <%= simple_form_for @user do |f| %>
+            <%= simple_form_for current_user do |f| %>
               <%# <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
                <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
               <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
@@ -57,7 +57,7 @@
       </h2>
       <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          <%= simple_form_for @user do |f| %>
+          <%= simple_form_for current_user do |f| %>
             <%= f.input :bio, as: :text %>
             <%= f.button :submit, class: "btn btn-primary " %>
           <% end %>
@@ -73,7 +73,7 @@
       <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <div class="container mb-3">
-            <%= simple_form_for [@user] do |f| %>
+            <%= simple_form_for current_user do |f| %>
             <%= f.association :activities,
                   as: :check_boxes,
                   input_html: { class: "tag-selector" },
@@ -93,7 +93,7 @@
       <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <div class="container mb-3">
-            <%= simple_form_for [@user] do |f| %>
+            <%= simple_form_for current_user do |f| %>
             <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
             <%= f.input :photos, as: :file, input_html: { multiple: true  },label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
             <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
