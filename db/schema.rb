@@ -107,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_221959) do
     t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name"
-    t.string "gender"
+    t.string "gender", default: ""
     t.string "address", default: "London"
     t.integer "age"
     t.string "level_of_fitness"

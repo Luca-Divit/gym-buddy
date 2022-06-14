@@ -23,8 +23,8 @@ puts "start creating users"
 250.times do
   start_time1 = rand(5..23).to_i
   end_time1 = start_time1.to_i + rand(1..4).to_i
-  gender = ["male", "female"].sample.to_s
-  if gender == "male"
+  gender = ["Male", "Female"].sample.to_s
+  if gender == "Male"
     file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870356/gym-buddy-males/#{rand(2..20)}.jpg")
   else
     file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870284/Gym-buddy-females/#{rand(1..9)}.jpg")
@@ -55,7 +55,7 @@ puts "start creating users"
       "Eat, sleep , gym , repeat."
     ].sample
   )
-  if user.gender == "male"
+  if user.gender == "Male"
     user.first_name = Faker::Name.male_first_name
   else
     user.first_name = Faker::Name.female_first_name
