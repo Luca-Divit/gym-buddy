@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
     @my_gymbuddies = @all_matches.where(status: 1)
     @my_match_to_accept = Match.where(user_receiver_id: current_user.id)
     @my_match_to_accept_real = @my_match_to_accept.where(status: 0)
+    @chatroom = Chatroom.new
   end
 
   def create
