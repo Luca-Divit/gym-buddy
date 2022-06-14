@@ -36,6 +36,14 @@
                       <% match.user_receiver.days_available.each do |day| %>
                         <strong><%= day %></strong>
                       <% end %>
+                      <br>
+                      <% if match.chatrooms.first.nil? %>
+                        <%= simple_form_for [current_user, match, @chatroom] do |f| %>
+                        <%= f.submit "Start chat!", class: "btn btn-primary" %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to "Chat", user_match_chatroom_path(current_user, match, match.chatrooms.first), class: "btn btn-primary", style:"display: center" %>
+                      <% end %>
                       </h6>
                   </div>
                 </div>
@@ -57,11 +65,20 @@
                       <% match.user_requester.days_available.each do |day| %>
                         <strong><%= day %></strong>
                       <% end %>
+                      <br>
+                      <% if match.chatrooms.first.nil? %>
+                        <%= simple_form_for [current_user, match, @chatroom] do |f| %>
+                        <%= f.submit "Start chat!", class: "btn btn-primary" %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to "Chat", user_match_chatroom_path(current_user, match, match.chatrooms.first), class: "btn btn-primary", style:"display: center" %>
+                      <% end %>
                       </h6>
                   </div>
                 </div>
               <% end %>
             <% end %>
+
           <% end %>
         </ul>
       </div>
