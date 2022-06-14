@@ -11,8 +11,8 @@
         <img src="<%= cl_image_path user.photos.first.key%>" alt="">
         <div>
           <h5><%= user.first_name %></h5>
-          <p>Available days:<% user.days_available.each do |day| %>
-          <%= day %>
+          <p>Activities:<% user.activities.each do |activities| %>
+          <%= activities.name.capitalize %>
           <% end %></p>
           <p>Age: <%= user.age %><span style="padding-left:12px"><%= link_to "See details", user_path(user) %></span></p>
         </div>
