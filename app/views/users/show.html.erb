@@ -1,21 +1,25 @@
 <%= render "shared/navbar" %>
 <div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 37px;" data-controller="request">
   <div class = "mb-4 pt-4 d-flex justify-content-between">
-    <%= link_to homepage_users_path do %>
-    <div><span class="fa-stack fa-2x" style = "font-size: 16px">
-      <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
-      <i class="fa-solid fa-angle-left fa-stack-1x fa-inverse"></i>
-      </span>
+    <div data-action="click->request#DiscardRequest">
+      <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 2), data:{ turbo_method: :post } do %>
+        <span class="fa-stack fa-2x" style = "font-size: 16px">
+          <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+          <i data-request-target="discardRequest" class="fa-solid fa-thumbs-down fa-stack-1x fa-inverse send-request"></i>
+        </span>
+      <% end %>
     </div>
-    <% end %>
     <div>
       <h3 class="text-center"><%= @user.first_name %>, <%= @user.age %></h3>
       <p>Fitness Level: <%= @user.level_of_fitness %></p>
     </div>
-    <div data-action="click->request#SendRequest"><span class="fa-stack fa-2x" style = "font-size: 16px">
-      <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
-      <i data-request-target="sendRequest" class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse send-request"></i>
-      </span>
+    <div data-action="click->request#SendRequest">
+      <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post } do %>
+        <span class="fa-stack fa-2x" style = "font-size: 16px">
+          <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+          <i data-request-target="sendRequest" class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse send-request"></i>
+        </span>
+      <% end %>
     </div>
   </div>
   <div class = "show-img text-center mb-4">

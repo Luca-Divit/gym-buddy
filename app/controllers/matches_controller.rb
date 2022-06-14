@@ -14,6 +14,7 @@ class MatchesController < ApplicationController
     CommentNotification.with(message: "You recieved a match request from  #{User.find(@match.user_requester_id).first_name}").deliver(User.find(@match.user_receiver_id))
     @match.status = params[:status].to_i
     @match.save!
+    sleep(3)
     redirect_to homepage_users_path
   end
 
