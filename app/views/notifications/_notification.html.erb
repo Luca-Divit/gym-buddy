@@ -1,15 +1,30 @@
-<li>
-  <div>
-    <p class="text-gray-700">
-      <%= notification.to_notification.message %>
-    </p>
-    <div class="flex justify-between mt-1 text-gray-500 text-sm space-x-4">
-      <p>
-        Received on <%= notification.created_at.to_date %>
-      </p>
-      <p>
-        Status: <%= notification.read? ? "Read" : "Unread" %>
-      </p>
-    </div>
-  </div>
-</li>
+<% if current_user %>
+  <li class="nav-item notification-ul dropdown">
+    <a class="nav-link dropdown-toggle bagde-design" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="badge rounded-pill">
+        <%= @unread.count >= 9 ? "9+" : @unread.count %> <i class="fa-solid fa-bell"></i>
+      </span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+      <% @unread.each do |notification| %>
+        <li class="dropdown-item">
+          <%= link_to notification.to_notification.message, notification.to_notification.url %>
+        </li>
+      <% end %>
+      <% if @read.count > 0 && @unread.count > 0 %>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+      <% elsif @read.count + @unread.count == 0 %>
+        <li class="dropdown-item">
+          No notifications yet.
+        </li>
+      <% end %>
+      <% @read.each do |notification| %>
+        <li class="dropdown-item">
+          <%= link_to notification.to_notification.message, notification.to_notification.url %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

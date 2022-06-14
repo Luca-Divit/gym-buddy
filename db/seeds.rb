@@ -20,7 +20,7 @@ end
 activity = Activity.all
 
 puts "start creating users"
-150.times do
+200.times do
   start_time1 = rand(5..23).to_i
   end_time1 = start_time1.to_i + rand(1..4).to_i
   gender = ["male","female"].sample.to_s
@@ -52,7 +52,7 @@ users = User.all
 
 puts "start creating user_activities"
 users.each do |user|
-  2.times do
+  3.times do
   UserActivity.create!(
     user_id: user.id,
     activity_id: activity.sample.id
@@ -61,7 +61,7 @@ users.each do |user|
 end
 
 puts "start creating matches"
-50.times do
+60.times do
   users = User.all
   user_1 = users.sample
   user_2 = users.sample

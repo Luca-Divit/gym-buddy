@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   def setting
-    @user = current_user
   end
 
   def update
@@ -79,7 +78,6 @@ class UsersController < ApplicationController
     user1.requested_matches.each do |user|
       @users_matching.delete(user)
     end
-
 
     # 2 - Filter by activity if parameter provided by user
     current_user_activities_name = [] # get the activities of the current user if they exists
