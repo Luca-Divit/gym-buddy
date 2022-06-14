@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
-  before_action :filtered_users, only: [ :index, :homepage ]
+  before_action :filtered_users, only: [ :index, :homepage, :map ]
 
   def index
   end
@@ -43,6 +43,15 @@ class UsersController < ApplicationController
     @my_gymbuddies = @all_matches.where(status: 1)
     @my_match_to_accept = Match.where(user_receiver_id: current_user.id)
     @my_match_to_accept_real = @my_match_to_accept.where(status: 0)
+  end
+
+  def map
+    @markers = @users_matching.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+    end
   end
 
   private
