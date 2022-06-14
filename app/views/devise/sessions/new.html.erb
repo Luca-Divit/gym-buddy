@@ -21,9 +21,11 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Log in" , class: "btn btn-primary" %>
+          <%= f.button :submit, "Log in" , class: "btn btn-primary mb-2" %>
         </div>
       <% end %>
+      <p style ="margin-bottom: 5px"><%= link_to "Forgot password?", new_user_password_path %></p>
+      <span><p class= "mt-2 text-start">Don't have an account yet? <%= link_to "Sign up", new_user_registration_path %></p></span>
     </div>
   </div>
 </div>
