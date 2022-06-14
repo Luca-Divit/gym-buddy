@@ -1,22 +1,26 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
-  before_action :filtered_users, only: [ :index, :homepage, :map, :show]
+  before_action :filtered_users, only: [ :index, :homepage, :map, :show, :map ]
 
   def index
   end
 
   def show
     @user = User.find(params[:id])
-    @markers = @users.geocoded.map do |user|
+    @markers = [
       {
-        lat: user.latitude,
-        lng: user.longitude
+        lat: @user.latitude,
+        lng: @user.longitude
+      },
+      {
+        lat: current_user.latitude,
+        lng: current_user.longitude
       }
-    end
+    ]
   end
 
   def map
-    @markers = @users_matching.geocoded.map do |user|
+    @markers = @users_matching.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude
