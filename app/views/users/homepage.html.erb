@@ -1,6 +1,8 @@
 <nav class="fixed-top navbar-lewagon">
   <div class="d-flex justify-content-end">
+  <%= render 'notifications/notification' %>
     <span class= "gym-buddy-size mt-3 pe-5 me-4" style="color:#FFCE34" ><h4>GymBuddy</h4></span>
+    <%# <%= turbo_frame_tag "notifications", src: notifications_index_path %>
     <span class="mt-3 fs-2 px-4">
       <%= link_to setting_user_path(current_user) do %>
         <i class="fa-solid fa-gear"></i>
@@ -24,6 +26,7 @@
       <p><%= link_to "View all", users_path %></p>
     </div>
   </div>
+</div>
   <div class="scrolling-wrapper-flexbox">
     <% @users_matching.first(5).each do |user| %>
       <%= link_to user_path(user), class: "link" do %>
