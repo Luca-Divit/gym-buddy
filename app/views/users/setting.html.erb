@@ -38,11 +38,12 @@
       </h2>
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          <div class="container mb-3">
+          <div class="container mb-3 black-color">
             <%= simple_form_for current_user do |f| %>
               <%# <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
                <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
               <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
+              <%= f.input :partner_gender_preference, as: :radio_buttons, collection: ['Male', 'Female', 'Flexible'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
               <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
