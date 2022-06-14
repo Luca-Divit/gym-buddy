@@ -71,12 +71,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = User.all
     @users_five = @users.sample(5)
-    @markers = @users.geocoded.map do |user|
-      {
-        lat: user.latitude,
-        lng: user.longitude
-      }
-    end
+    @markers = [{
+      lat: @user.latitude,
+      lng: @user.longitude,
+      info_window: render_to_string(partial: "info_window", locals: {user: @user})
+      }]
   end
 
   def setting

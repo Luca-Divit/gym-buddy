@@ -10,8 +10,9 @@ export default class extends Controller {
 
   }
 
-  SendRequest(){
+  SendRequest(event){
     this.sendRequestTarget.classList.add("send-request");
     swal("Request sent!", "Continue matching", "success")
+    event.preventDefault();
   }
 }

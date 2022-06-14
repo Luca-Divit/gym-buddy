@@ -23,7 +23,9 @@
   <div class = "show-img text-center mb-4">
     <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
   </div>
-  <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
+  <div>
+    <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
+  </div>
   <div>
     <div class= "basic-info" style = "border-bottom:1px">
       <h6>Basic information</h6>
