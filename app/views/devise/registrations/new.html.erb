@@ -36,9 +36,10 @@
           <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         </div>
         <div class="form-actions">
-          <%= f.button :submit, "Sign up", class: "btn btn-primary"  %>
+          <%= f.button :submit, "Sign up", class: "btn btn-primary mb-2"  %>
         </div>
       <% end %>
+      <p>Already have an account? <%= link_to "Sign in", new_user_session_path %></p>
     </div>
   </div>
 </div>
