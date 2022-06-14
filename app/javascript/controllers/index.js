@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChatroomSubscriptionController from "./chatroom_subscription_controller.js"
+application.register("chatroom-subscription", ChatroomSubscriptionController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
@@ -12,7 +15,6 @@ application.register("map", MapController)
 
 import NavbarController from "./navbar_controller.js"
 application.register("navbar", NavbarController)
-
 
 import RequestController from "./request_controller.js"
 application.register("request", RequestController)

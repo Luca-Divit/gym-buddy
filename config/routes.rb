@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       get :homepage
     end
     resources :matches, only: [ :index, :update, :create ] do
-      resources :chatrooms, only:[:create,:show ]
+      resources :chatrooms, only:[:create,:show ] do
+        resources :messages, only: :create
+      end
     end
   end
 end
