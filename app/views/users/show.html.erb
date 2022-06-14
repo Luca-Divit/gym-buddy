@@ -1,4 +1,3 @@
-
 <%= render "shared/navbar" %>
 <div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 37px;" data-controller="request">
   <div class = "mb-4 pt-4 d-flex justify-content-between">
@@ -18,12 +17,11 @@
       <i data-request-target="sendRequest" class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse send-request"></i>
       </span>
     </div>
-
   </div>
   <div class = "show-img text-center mb-4">
     <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
   </div>
-  <div>
+  <div data-action="click->request#SendRequest">
     <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
   </div>
   <div>
@@ -59,12 +57,10 @@
     </div>
   <% end %>
    <hr>
-
   <div style="width: 100%; height: 300px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
   <div class = "mt-5 text-center">
     <h5>You share similar activities</h5>
     <div class="scrolling-wrapper-flexbox">

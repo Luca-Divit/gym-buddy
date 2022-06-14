@@ -1,7 +1,57 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
+  before_action :filtered_users, only: [ :index, :homepage ]
 
   def index
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @users = User.all
+    @users_five = @users.sample(5)
+    @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+    end
+  end
+
+  def setting
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    UserActivity.where(user: @user).each { |activity| UserActivity.destroy(activity.id) }
+    if params["user"]["activity_ids"]
+      params["user"]["activity_ids"].shift
+      params["user"]["activity_ids"].each do |id|
+        if Activity.find(id.to_i)
+         @user.activities << Activity.find(id.to_i)
+      end
+    end
+    else
+      @user.update(user_params)
+    end
+
+    redirect_to setting_user_path(@user)
+  end
+
+  def homepage
+    @all_matches = Match.all
+    @my_gymbuddies = @all_matches.where(status: 1)
+    @my_match_to_accept = Match.where(user_receiver_id: current_user.id)
+    @my_match_to_accept_real = @my_match_to_accept.where(status: 0)
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :gender, :address, :level_of_fitness,:bio, days_available: [], photos: [],
+                                 user_activities_attributes: [:activity_ids => []])
+  end
+
+  def filtered_users
     # 1 - Setting the factbase
     @users = User.all
     @users_matching = []
@@ -57,57 +107,14 @@ class UsersController < ApplicationController
     end
 
     # 4 - Filter by preffered gender
-   if user1.partner_gender_preference != nil
+    if user1.partner_gender_preference != nil
       @users_matching_3 = []
       @users_matching.each do |user|
         (user.gender == user1.partner_gender_preference && user1.gender == user.partner_gender_preference)? @users_matching_3 << user : nil
       end
       @users_matching = @users_matching_3
     end
-
   end
 
-  def show
-    @user = User.find(params[:id])
-    @users = User.all
-    @users_five = @users.sample(5)
-    @markers = [{
-      lat: @user.latitude,
-      lng: @user.longitude,
-      info_window: render_to_string(partial: "info_window", locals: {user: @user})
-      }]
-  end
 
-  def setting
-    @user = current_user
-  end
-
-  def update
-    @user = current_user
-    UserActivity.where(user: @user).each { |activity| UserActivity.destroy(activity.id) }
-    if params["user"]["activity_ids"]
-      params["user"]["activity_ids"].shift
-      params["user"]["activity_ids"].each do |id|
-        if Activity.find(id.to_i)
-         @user.activities << Activity.find(id.to_i)
-      end
-    end
-    else
-      @user.update(user_params)
-    end
-
-    redirect_to setting_user_path(@user)
-  end
-
-  def homepage
-    @user = current_user
-    @users = User.all
-    @users_five = @users.sample(5)
-  end
-
-  private
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :gender, :address, :level_of_fitness,:bio, days_available: [], photos: [],
-                                 user_activities_attributes: [:activity_ids => []])
-  end
 end
