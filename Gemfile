@@ -6,6 +6,8 @@ gem "dotenv-rails", groups: [:development, :test]
 
 gem "cloudinary"
 
+gem "noticed", "~> 1.5"
+
 gem "geocoder"
 
 gem 'pry-byebug'
@@ -84,5 +86,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-gem "noticed", "~> 1.5"

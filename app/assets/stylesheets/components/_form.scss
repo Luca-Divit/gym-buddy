@@ -14,7 +14,7 @@
   border-radius: 50rem;
   padding: 0.1rem 0.5rem;
   background-color: white;
-  color: #FFCE34;
+  color: black;
   border: 1px solid #FFCE34;
   margin-right: 0.6rem;
   margin-bottom: 0.4rem;
@@ -22,7 +22,7 @@
 
 .tag-selector:checked + label {
   background-color: #FFCE34;
-  color: white;
+  color: black;
 }
 
 .form-check-input.is-valid ~ .form-check-label {
