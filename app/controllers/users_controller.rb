@@ -1,15 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :setting, :update, :homepage ]
-  before_action :filtered_users, only: [ :index, :homepage, :map ]
+  before_action :filtered_users, only: [ :index, :homepage, :map, :show]
 
   def index
   end
 
   def show
     @user = User.find(params[:id])
-    @users = User.all
-    @users_five = @users.sample(5)
     @markers = @users.geocoded.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude
+      }
+    end
+  end
+
+  def map
+    @markers = @users_matching.geocoded.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude
@@ -28,13 +35,12 @@ class UsersController < ApplicationController
       params["user"]["activity_ids"].shift
       params["user"]["activity_ids"].each do |id|
         if Activity.find(id.to_i)
-         @user.activities << Activity.find(id.to_i)
+          @user.activities << Activity.find(id.to_i)
+        end
       end
-    end
     else
       @user.update(user_params)
     end
-
     redirect_to setting_user_path(@user)
   end
 
@@ -43,15 +49,6 @@ class UsersController < ApplicationController
     @my_gymbuddies = @all_matches.where(status: 1)
     @my_match_to_accept = Match.where(user_receiver_id: current_user.id)
     @my_match_to_accept_real = @my_match_to_accept.where(status: 0)
-  end
-
-  def map
-    @markers = @users_matching.geocoded.map do |user|
-      {
-        lat: user.latitude,
-        lng: user.longitude
-      }
-    end
   end
 
   private
@@ -124,6 +121,4 @@ class UsersController < ApplicationController
       @users_matching = @users_matching_3
     end
   end
-
-
 end
