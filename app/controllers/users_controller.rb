@@ -113,7 +113,7 @@ class UsersController < ApplicationController
     end
 
     # 3 - Filter by fitness level if paramter provided by user
-    unless current_user.level_of_fitness.nil?
+    unless current_user.level_of_fitness.empty?
       @users_matching_2 = []
       @users_matching.each do |user|
         if user.level_of_fitness == current_user.level_of_fitness
@@ -128,10 +128,7 @@ class UsersController < ApplicationController
       @users_matching_3 = []
       @users_matching.each do |user|
         unless user.gender.nil?
-          unless current_user.gender.nil?
-            @users_matching_3 << user if current_user.partner_gender_preference == user.gender
-          end
-          @users_matching_3 << user
+          @users_matching_3 << user if current_user.partner_gender_preference == user.gender
         end
       end
       @users_matching = @users_matching_3
