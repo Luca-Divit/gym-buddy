@@ -35,6 +35,6 @@ class CommentNotification < Noticed::Base
   #   t(".message")
   # end
   def url
-    post_path(params[:post])
+    notifications_index_path(params[:message])
   end
 end

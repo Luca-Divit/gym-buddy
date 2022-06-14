@@ -94,7 +94,8 @@
         <div class="accordion-body">
           <div class="container mb-3">
             <%= simple_form_for [@user] do |f| %>
-            <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+            <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
+            <%= f.input :photos, as: :file, input_html: { multiple: true  },label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
             <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
