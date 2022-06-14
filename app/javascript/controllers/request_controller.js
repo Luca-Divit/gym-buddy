@@ -4,10 +4,13 @@ import swal from 'sweetalert';
 
 // Connects to data-controller="request"
 export default class extends Controller {
-  static targets = ["sendRequest", "redirectUrl"]
+  static targets = ["discardRequest", "sendRequest"]
   // static values = { url: String }
   connect() {
+    // console.log(this.sendRequestTarget)
+    // console.log(this.discardRequestTarget)
     this.sendRequestTarget.classList.remove("send-request")
+    this.discardRequestTarget.classList.remove("send-request")
     // URL = this.redirectUrlTarget.innerHTML
 
   }
@@ -32,5 +35,14 @@ export default class extends Controller {
     //   window.location.href = this.urlValue;
     // }
 
+  }
+
+  DiscardRequest(){
+    this.discardRequestTarget.classList.add("send-request");
+    swal(
+      "Not my fit!",
+      "Continue matching",
+      "error"
+    )
   }
 }
