@@ -107,14 +107,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_221959) do
     t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name"
-    t.string "gender", default: ""
+    t.string "gender"
     t.string "address", default: "London"
     t.integer "age"
     t.string "level_of_fitness"
     t.string "days_available", default: [], array: true
     t.integer "start_time"
     t.integer "end_time"
-    t.string "partner_gender_preference", default: "Flexible"
+    t.string "partner_gender_preference"
     t.text "bio"
     t.float "latitude"
     t.float "longitude"

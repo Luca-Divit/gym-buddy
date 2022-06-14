@@ -128,7 +128,10 @@ class UsersController < ApplicationController
       @users_matching_3 = []
       @users_matching.each do |user|
         unless user.gender.nil?
-          @users_matching_3 << user if current_user.partner_gender_preference.downcase == user.gender.downcase
+          unless current_user.gender.nil?
+            @users_matching_3 << user if current_user.partner_gender_preference == user.gender
+          end
+          @users_matching_3 << user
         end
       end
       @users_matching = @users_matching_3
