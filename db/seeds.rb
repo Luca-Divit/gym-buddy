@@ -35,7 +35,7 @@ puts "start creating users"
     last_name: Faker::Name.last_name,
     gender: gender,
     address: ["London", "Shoreditch", "Haggerston", "Hoxton", "Islington", "Bethnal Green", "Islington", "Dalston", "Hackney", "Barbican"].sample.to_s,
-    age: rand(15..40).to_i,
+    age: rand(18..39).to_i,
     level_of_fitness: ["Beginner","Intermediate","Advanced"].sample.to_s,
     days_available: ["Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday"].sample(3),
     start_time: start_time1,
@@ -49,7 +49,7 @@ puts "start creating users"
       "Work. Train. Repeat.",
       "Work hard now, selfie later.",
       "Fit and Fat differ by middle alphabet.",
-      "I’m in a good place right now, not emotionally, I am just at the gym.",
+      "I am in a good place right now, not emotionally, I am just at the gym.",
       "No pain, no gain. Shut up and train",
       "Change your body by changing your thoughts.",
       "Eat, sleep , gym , repeat."

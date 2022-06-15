@@ -121,7 +121,6 @@ class UsersController < ApplicationController
       end
       @users_matching = @users_matching_2
     end
-    raise
 
     # 4 - Filter by preffered gender
     if current_user.partner_gender_preference != "Flexible"
