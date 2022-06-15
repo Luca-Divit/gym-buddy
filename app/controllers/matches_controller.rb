@@ -27,6 +27,7 @@ class MatchesController < ApplicationController
       #the other guy accepted your request
       @chatroom = Chatroom.create(match_id: @match.id, name: @match.user_receiver.first_name)
     end
+    CommentNotification.with(message: "Your match request was accepted by   #{User.find(@match.user_receiver_id).first_name}").deliver(User.find(@match.user_requester_id))
     redirect_back(fallback_location: root_path)
   end
 end
