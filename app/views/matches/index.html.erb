@@ -1,5 +1,5 @@
 <div class="wrapper d-flex flex-column justify-content-between">
-  <div class="container ">
+  <div class="container" style="padding-bottom: 50px;">
     <div class="content-aligned py-3 container">
       <h1>GymBuddy</h1>
     </div>
@@ -26,16 +26,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
                   <% end %>
                   <div class="card-product-infos">
-                    <h2><%= match.user_receiver.first_name %></h2>
-                    <h6>I like:
-                      <% match.user_receiver.activities.each do |activity| %>
-                        <strong><%= activity.name %></strong>
-                      <% end %>
-                      <br>
-                      Preferred days:
-                      <% match.user_receiver.days_available.each do |day| %>
-                        <strong><%= day %></strong>
-                      <% end %>
+                    <h1><%= match.user_receiver.first_name %></h1>
                       <br>
                       <% if match.chatrooms.first.nil? %>
                         <%= simple_form_for [current_user, match, @chatroom] do |f| %>
@@ -56,15 +47,6 @@
                   <% end %>
                   <div class="card-product-infos">
                     <h2><%= match.user_requester.first_name %></h2>
-                    <h6>I like:
-                      <% match.user_requester.activities.each do |activity| %>
-                        <strong><%= activity.name %></strong>
-                      <% end %>
-                      <br>
-                      Preferred days:
-                      <% match.user_requester.days_available.each do |day| %>
-                        <strong><%= day %></strong>
-                      <% end %>
                       <br>
                       <% if match.chatrooms.first.nil? %>
                         <%= simple_form_for [current_user, match, @chatroom] do |f| %>
@@ -78,11 +60,9 @@
                 </div>
               <% end %>
             <% end %>
-
           <% end %>
         </ul>
       </div>
-
       <% if @my_match_to_accept_real %>
         <div class="list-match-accepted d-none" data-tabs-target="content2">
           <ul>
@@ -94,17 +74,7 @@
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
                 <% end %>
                   <div class="card-product-infos">
-                    <h2><%= match.user_requester.first_name %></h2>
-                    <h6>I like:
-                      <% match.user_requester.activities.each do |activity| %>
-                        <strong><%= activity.name %></strong>
-                      <% end %>
-                      <br>
-                      Preferred days:
-                      <% match.user_requester.days_available.each do |day| %>
-                        <strong><%= day %></strong>
-                      <% end %>
-                    </h6>
+                    <h1><%= match.user_requester.first_name %></h1>
                   </div>
                 </div>
                 <div class="buttons d-flex justify-content-evenly">
