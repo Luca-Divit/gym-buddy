@@ -1,11 +1,12 @@
 .card-product {
   overflow: hidden;
-  height: 120px;
+  height: 150px;
   background: black;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   color: $our-white;
+  border-radius: 10px;
 }
 
 .card-product img {
@@ -34,4 +35,51 @@
 
 #image {
   object-fit: contain;
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  background: #222222;
+  border: 1px solid #FFC65A;
+  border-radius: 36px;
+  padding-right: 10px;
+  img {
+    margin-top: 0px;
+  }
+}
+
+.notification .notification-content {
+  flex-grow: 1;
+  padding: 0 24px;
+}
+
+.notification p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.notification small {
+  color: #999999;
+  font-weight: bold;
+}
+.notification .notification-actions {
+  opacity: 0;
+  display: flex;
+  transition: ease .3s;
+}
+
+.notification:hover .notification-actions {
+  opacity: 1;
+}
+
+.notification .notification-actions a {
+  color: #999999;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.notification .notification-actions a:hover {
+  color: #555555;
 }

@@ -1,5 +1,5 @@
 <%= render "shared/navbar" %>
-<div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 37px;" data-controller="request">
+<div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 70px;" data-controller="request">
   <div class = "mb-4 pt-4 d-flex justify-content-between">
     <div data-action="click->request#DiscardRequest">
       <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 2), data:{ turbo_method: :post } do %>
