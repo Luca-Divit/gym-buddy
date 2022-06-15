@@ -1,5 +1,9 @@
 class ChatroomsController < ApplicationController
 
+  def index
+    @chatrooms = Chatroom.all
+  end
+
   def show
     #need to get the match params id
     @match = Match.find(params[:match_id])

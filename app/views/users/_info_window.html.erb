@@ -1,2 +1,15 @@
-<p><%= user.first_name %>, <%= user.age %></p>
-<h5><%= user.address %></h5>
+<% if user != current_user %>
+  <%= link_to user_path(user), class: "black" do %>
+    <div class="">
+      <h5><%= user.first_name %>, <%= user.age %></h5>
+      <p><%= user.address %></p>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to homepage_users_path, class: "black" do %>
+    <div class="">
+      <h5><%= user.first_name %>, <%= user.age %></h5>
+      <p><%= user.address %></p>
+    </div>
+  <% end %>
+<% end %>
