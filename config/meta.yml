@@ -1,0 +1,5 @@
+meta_product_name: "Gym Buddy"
+meta_title: "Gym Buddy - Find someone to train with, get Fitter and Healthier together"
+meta_description: "Love workout?  Find a buddy to go on the journey together . Train together and get fit together"
+meta_image: "boxing.jpg" # should exist in `app/assets/images/`
+twitter_account: "@gymbudy"
