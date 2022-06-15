@@ -10,11 +10,13 @@ class UsersController < ApplicationController
     @markers = [
       {
         lat: @user.latitude,
-        lng: @user.longitude
+        lng: @user.longitude,
+        info_window: render_to_string(partial: "info_window", locals: {user: @user})
       },
       {
         lat: current_user.latitude,
-        lng: current_user.longitude
+        lng: current_user.longitude,
+        info_window: render_to_string(partial: "info_window", locals: {user: current_user})
       }
     ]
   end
@@ -23,7 +25,8 @@ class UsersController < ApplicationController
     @markers = @users_matching.map do |user|
       {
         lat: user.latitude,
-        lng: user.longitude
+        lng: user.longitude,
+        info_window: render_to_string(partial: "info_window", locals: {user: user})
       }
     end
   end
