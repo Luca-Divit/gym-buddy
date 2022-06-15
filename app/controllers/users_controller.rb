@@ -111,24 +111,26 @@ class UsersController < ApplicationController
       end
       @users_matching = @users_matching_1
     end
-
     # 3 - Filter by fitness level if paramter provided by user
-    unless current_user.level_of_fitness.empty?
-      @users_matching_2 = []
-      @users_matching.each do |user|
-        if user.level_of_fitness == current_user.level_of_fitness
-          @users_matching_2 << user
-        end
+    @users_matching_2 = []
+    @users_matching.each do |user|
+      if user.level_of_fitness == current_user.level_of_fitness && current_user.level_of_fitness != ""
+        @users_matching_2 << user
+      else
+        @users_matching_2 << user
       end
       @users_matching = @users_matching_2
     end
+    raise
 
     # 4 - Filter by preffered gender
     if current_user.partner_gender_preference != "Flexible"
       @users_matching_3 = []
       @users_matching.each do |user|
-        unless user.gender.nil?
+        if !user.gender.nil?
           @users_matching_3 << user if current_user.partner_gender_preference == user.gender
+        else
+          @users_matching_3 << user
         end
       end
       @users_matching = @users_matching_3
