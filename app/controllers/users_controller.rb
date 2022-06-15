@@ -123,16 +123,16 @@ class UsersController < ApplicationController
     end
 
     # 4 - Filter by preffered gender
-    if current_user.partner_gender_preference != "Flexible"
-      @users_matching_3 = []
-      @users_matching.each do |user|
-        if !user.gender.nil?
-          @users_matching_3 << user if current_user.partner_gender_preference == user.gender
-        else
-          @users_matching_3 << user
+    @users_matching_3 = []
+      if current_user.partner_gender_preference != "Flexible"
+        @users_matching.each do |user|
+        (user.gender == current_user.partner_gender_preference && (user.partner_gender_preference == current_user.gender || user.partner_gender_preference == "Flexible")) ? @users_matching_3 << user : nil
+        end
+      else
+        @users_matching.each do |user|
+        (user.partner_gender_preference == current_user.gender || user.partner_gender_preference == "Flexible") ? @users_matching_3 << user : nil
         end
       end
       @users_matching = @users_matching_3
-    end
   end
 end
