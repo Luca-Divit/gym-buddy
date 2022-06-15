@@ -1,29 +1,43 @@
-<div class="wrapper d-flex flex-column justify-content-between">
-  <div class="container ">
-    <div class="content-aligned py-3 container">
-      <h1>GymBuddy</h1>
-    </div>
-    <%# Start to write your code below %>
-    <div class="container chatroom"
-      data-controller="chatroom-subscription"
-      data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
-      <h1><%= @chatroom.name %></h1>
-      <div class="messages" data-chatroom-subscription-target="messages">
-        <% @chatroom.messages.each do |message| %>
-          <%= render "messages/message", message: message %>
-        <% end %>
+<div class="container chatroom"
+  data-controller="chatroom-subscription"
+  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+  >
+  <div class = "pt-0 mb-0">
+    <div class = "d-flex align-items-center">
+      <div class = col-2><% if (User.find(@match.user_requester_id).photos.first && @match.user_requester_id != current_user.id)  %>
+        <%= cl_image_tag User.find(@match.user_requester_id).photos.first.key,height: 50, width:60, class: "avatar-large m-0 p-0", alt: "avatar-large" %>
       </div>
-      <%= simple_form_for [current_user, @match, @chatroom, @message],
-      html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
-      %>
-        <%= f.input :content,
-          label: false,
-          placeholder: "Type somethign here",
-          wrapper_html: {class: "flex-grow-1"}
-        %>
-        <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+        <div>
+          <h2><%= User.find(@match.user_requester_id).first_name%></h2>
+          <p><em>Matched on</em> <%=@match.created_at.strftime("%a %b %e")%>
+        </div>
+      </div>
       <% end %>
+    <div class = col-2><% if (User.find(@match.user_receiver_id).photos.first && @match.user_receiver_id != current_user.id) %>
+      <%= cl_image_tag User.find(@match.user_receiver_id).photos.first.key,height: 50, width:60, class: "avatar-large m-0 p-0", alt: "avatar-large" %>
     </div>
+    <div>
+      <h2><%= User.find(@match.user_receiver_id).first_name%></h2>
+      <p><em>Matched on</em> <%=@match.created_at.strftime("%a %b %e")%>
+    </div>
+    <% end %>
   </div>
-  <%= render "shared/footer" %>
+  </div>
+  <hr>
+  <div class="messages" data-chatroom-subscription-target="messages">
+    <% @chatroom.messages.each do |message| %>
+    <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
+  <%= simple_form_for [current_user, @match, @chatroom, @message],
+  html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
+  %>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Don't be shy...",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+<% end %>
+ <%= render "shared/footer" %>
 </div>

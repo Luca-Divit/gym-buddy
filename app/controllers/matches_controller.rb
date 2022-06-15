@@ -1,8 +1,10 @@
 class MatchesController < ApplicationController
 
   def index
-    @all_matches = Match.all
-    @my_gymbuddies = @all_matches.where(status: 1)
+    confirmed_matches = Match.all.where(status: 1)
+    requested_confirmed_matches = confirmed_matches.where(user_requester_id: current_user.id)
+    received_confirmed_matches = confirmed_matches.where(user_receiver_id: current_user.id)
+    @my_gymbuddies = requested_confirmed_matches + received_confirmed_matches
     @my_match_to_accept = Match.where(user_receiver_id: current_user.id)
     @my_match_to_accept_real = @my_match_to_accept.where(status: 0)
     @chatroom = Chatroom.new
