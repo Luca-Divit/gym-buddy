@@ -8,7 +8,9 @@
   <% @users_matching.each do |user| %>
     <% if user != current_user %>
       <div class = "activity-card mb-3">
-        <img src="<%= cl_image_path user.photos.first.key%>" alt="">
+        <%= link_to user_path(user), class: "link" do %>
+          <img src="<%= cl_image_path user.photos.first.key%>" alt="">
+        <% end %>
         <div>
           <h5><%= user.first_name %></h5>
           <p>Activities:<% user.activities.each do |activities| %>
