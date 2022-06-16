@@ -1,7 +1,7 @@
 <% if user != current_user %>
   <%= link_to user_path(user), class: "black" do %>
     <div class="">
-      <h5><%= user.first_name %>, <%= user.age %></h5>
+      <h5><%= user.first_name %> <%= user.age %></h5>
       <p><%= user.address %></p>
     </div>
   <% end %>
