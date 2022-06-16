@@ -1,34 +1,33 @@
 <div class="container chatroom"
   data-controller="chatroom-subscription"
-  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
-  >
-  <div class = "pt-0 mb-0">
+  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+
+  <div class = "pt-0 mb-0 px-1">
     <div class = "d-flex align-items-center">
 
-      <div class = col-2><% if (User.find(@match.user_requester_id).photos.first && @match.user_requester_id != current_user.id)  %>
+      <%# Otherwise if the current user is the receiver then show the picture of the requster %>
+        <% if (User.find(@match.user_requester_id).photos.first && @match.user_requester_id != current_user.id)  %>
         <%= cl_image_tag User.find(@match.user_requester_id).photos.first.key,height: 50, width:60, class: "avatar-large m-0 p-0", alt: "avatar-large" %>
-      </div>
 
         <div>
-          <h2><%= User.find(@match.user_requester_id).first_name%></h2>
-          <p><em>Matched on</em> <%=@match.created_at.strftime("%a %b %e")%>
+          <h2 class = my-0><%= User.find(@match.user_requester_id).first_name%></h2>
+          <p class = mb-0><em>Matched on</em> <%=@match.created_at.strftime("%a %b %e")%>
         </div>
-      <% end %>
+        <% end %>
 
-      <div class = col-2><% if (User.find(@match.user_receiver_id).photos.first && @match.user_receiver_id != current_user.id) %>
+      <%# Otherwise if the current user is the reuester then show the picture of the receiver %>
+        <% if (User.find(@match.user_receiver_id).photos.first && @match.user_receiver_id != current_user.id) %>
         <%= cl_image_tag User.find(@match.user_receiver_id).photos.first.key,height: 50, width:60, class: "avatar-large m-0 p-0", alt: "avatar-large" %>
-      </div>
 
       <div>
-        <h2><%= User.find(@match.user_receiver_id).first_name%></h2>
-        <p><em>Matched on</em> <%=@match.created_at.strftime("%a %b %e")%>
+        <h2 class = my-0><%= User.find(@match.user_receiver_id).first_name%></h2>
+        <p class = mb-0><em>Matched on</em> <%=@match.created_at.strftime("%a %b %e")%>
       </div>
       <% end %>
 
     </div>
   </div>
   <hr>
-</div>
   <div class="messages" data-chatroom-subscription-target="messages">
     <% @chatroom.messages.each do |message| %>
     <%= render "messages/message", message: message %>
