@@ -5,9 +5,15 @@
   <div class = "pt-0 mb-0 px-1">
     <div class = "d-flex align-items-center">
 
+      <div class="go-back">
+        <%= link_to user_matches_path(current_user) do %>
+          <i class="fa-solid fa-angle-left"></i>
+        <% end %>
+      </div>
+
       <%# Otherwise if the current user is the receiver then show the picture of the requster %>
         <% if (User.find(@match.user_requester_id).photos.first && @match.user_requester_id != current_user.id)  %>
-        <%= cl_image_tag User.find(@match.user_requester_id).photos.first.key,height: 50, width:60, class: "avatar-large m-0 p-0", alt: "avatar-large" %>
+        <%= cl_image_tag User.find(@match.user_requester_id).photos.first.key,height: 50, width:60, class: "avatar-large my-0 ms-0 me-3 p-0", alt: "avatar-large" %>
 
         <div>
           <h2 class = my-0><%= User.find(@match.user_requester_id).first_name%></h2>
@@ -43,4 +49,3 @@
   %>
   <%= f.submit "Send", class: "btn btn-primary mb-3" %>
 <% end %>
- <%= render "shared/footer" %>
