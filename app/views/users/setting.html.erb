@@ -5,13 +5,15 @@
     <div>
     <% if current_user.photos.first %>
       <%= cl_image_tag current_user.photos.first.key,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+    <% else %>
+      <%= image_tag "avatarplace.png", alt: "avatar", class: "avatar-large", style: "object-fit:cover" %>
     <% end %>
     </div>
     <div>
       <h2 style= "color: #F4F4F4">My profile</h2>
     </div>
   </div>
-  <div class="accordion .accordion-flush pt-3 " id="accordionExample" , style ="margin-bottom:60px">
+  <div class="accordion .accordion-flush pt-3 " id="accordionExample" , style ="margin-bottom:40px">
     <div class="accordion-item mb-3">
       <h2 class="accordion-header" id="headingTwo">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -25,7 +27,7 @@
             <%= f.input :last_name %>
             <%= f.input :address %>
             <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female', 'Non-binary'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
-            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
+            <%= f.button :submit,"Update", data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
           <% end %>
         </div>
       </div>
@@ -45,7 +47,7 @@
               <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
               <%= f.input :partner_gender_preference, as: :radio_buttons, collection: ['Male', 'Female', 'Non-binary','Any'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
 
-              <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
+              <%= f.button :submit,"Update", data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
         </div>
@@ -61,7 +63,7 @@
         <div class="accordion-body">
           <%= simple_form_for current_user do |f| %>
             <%= f.input :bio, as: :text %>
-            <%= f.button :submit, class: "btn btn-primary " %>
+            <%= f.button :submit, "Update", class: "btn btn-primary " %>
           <% end %>
         </div>
       </div>
@@ -80,7 +82,7 @@
                   as: :check_boxes,
                   input_html: { class: "tag-selector" },
                   item_wrapper_class: 'tag-item' %>
-            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary" %>
+            <%= f.button :submit,"Update",data: { 'turbo-method': :patch }, class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>
@@ -98,7 +100,7 @@
             <%= simple_form_for current_user do |f| %>
             <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
             <%= f.input :photos, as: :file, input_html: { multiple: true  },label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
-            <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
+            <%= f.button :submit, "Update", data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
         </div>

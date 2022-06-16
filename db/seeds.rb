@@ -3,9 +3,9 @@ require "open-uri"
 Faker::Config.locale = 'en-GB'
 
 UserActivity.delete_all
-Match.delete_all
+# Match.delete_all
 Activity.delete_all
-User.delete_all
+# User.delete_all
 
 puts "start creating activities"
 activities = ["crossfit","bodybuilding","tennis","climbing","swimming","golf","running"]

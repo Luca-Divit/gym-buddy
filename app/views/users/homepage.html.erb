@@ -15,7 +15,11 @@
       <h3>Hi, <%= current_user.first_name %> ! <i class="fa-solid fa-hands-clapping" style = "color:#FFCE34"></i></h3>
       <p>What are you looking for today?</p>
     </div>
-    <%= cl_image_tag (current_user.photos.first.key) ,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+    <% if current_user.photos.first %>
+      <%= cl_image_tag (current_user.photos.first.key) ,height: 50, width:60, class: "avatar-large", alt: "avatar-large" %>
+    <% else %>
+      <%= image_tag "avatarplace.png", alt: "avatar", class: "avatar-large", style: "object-fit:cover; margin-top: 0px;" %>
+    <% end %>
   </div>
   <div class = "d-flex justify-content-between mt-5">
     <div>
