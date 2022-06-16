@@ -40,7 +40,7 @@ puts "start creating users"
     days_available: ["Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday"].sample(3),
     start_time: start_time1,
     end_time: end_time1.to_i,
-    partner_gender_preference: ["Male","Female","Flexible"].sample,
+    partner_gender_preference: ["Male","Female","Any"].sample,
     bio: [
       "Pain is temporary, pride is forever",
       "Shut up and squat!",
