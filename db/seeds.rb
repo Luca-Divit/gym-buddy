@@ -35,7 +35,7 @@ puts "start creating users"
     last_name: Faker::Name.last_name,
     gender: gender,
     address: ["London", "Shoreditch", "Haggerston", "Hoxton", "Islington", "Bethnal Green", "Islington", "Dalston", "Hackney", "Barbican"].sample.to_s,
-    age: rand(18..39).to_i,
+    age: rand(20..35).to_i,
     level_of_fitness: ["Beginner","Intermediate","Advanced"].sample.to_s,
     days_available: ["Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday"].sample(3),
     start_time: start_time1,
