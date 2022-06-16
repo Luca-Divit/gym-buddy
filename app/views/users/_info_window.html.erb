@@ -18,7 +18,7 @@
         <% else %>
           <%= image_tag "avatarplace.png", alt: "avatar", class: "avatar-large", style: "object-fit:cover; margin-top: 0px;" %>
         <% end %>
-      <h5 class="mt-2"><%= user.first_name %>, <%= user.age %></h5>
+      <h5 class="mt-2"><%= user.first_name %> <%= user.age %></h5>
       <p><%= user.address %></p>
     </div>
   <% end %>

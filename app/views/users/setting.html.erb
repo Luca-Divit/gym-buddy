@@ -26,6 +26,7 @@
             <%= f.input :first_name %>
             <%= f.input :last_name %>
             <%= f.input :address %>
+            <%= f.input :age %>
             <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female', 'Non-binary'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
             <%= f.button :submit,"Update", data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
           <% end %>
