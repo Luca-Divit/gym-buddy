@@ -1,5 +1,5 @@
 <%= render "shared/navbar" %>
-<div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 70px;" data-controller="request">
+<div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 37px;" data-controller="request">
   <div class = "mb-4 pt-4 d-flex justify-content-between">
     <div data-action="click->request#DiscardRequest">
       <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 2), data:{ turbo_method: :post } do %>
@@ -22,8 +22,13 @@
       <% end %>
     </div>
   </div>
+
   <div class = "show-img text-center mb-4">
-    <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
+    <% if @user.photos.first %>
+      <img src="<%= cl_image_path @user.photos.first.key%>" alt="">
+    <% else %>
+      <%= image_tag "avatarplace.png", alt: "avatar",style: "object-fit:cover; width: 90%; height: 20rem; " %>
+    <% end %>
   </div>
   <div data-action="click->request#SendRequest">
     <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
@@ -33,7 +38,7 @@
       <h6>Basic information</h6>
     </div>
     <div>
-      <p>Hi!! I like to swim and fight men for fun!</p>
+      <p><%= @user.bio %></p>
     </div>
   </div>
   <p><span style=" padding-right:6px">Prefer to train with:</span> <%= @user.partner_gender_preference %> </p>
@@ -68,10 +73,14 @@
   <div class = "mt-5 text-center">
     <h5>You share similar activities</h5>
     <div class="scrolling-wrapper-flexbox">
-      <% @users_matching.first(5).each do |user| %>
+      <% @users_matching.each do |user| %>
         <%= link_to user_path(user), class: "link" do %>
           <div class="cards">
+          <% if user.photos.first %>
             <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user.photos.first.key%>')">
+          <% else %>
+            <div class="card-category card-category-homepage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_tag "avatarplace.png" %>')">
+          <% end %>
               <div style = "padding-left:8px;">
                 <div style="margin-bottom:8rem;">
                   <br><p class= "scroll-name text-center"><%= user.first_name%></p>
