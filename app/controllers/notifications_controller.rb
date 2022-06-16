@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
     @notifications = Notification.where(recipient: current_user)
     @user = current_user
     mark_notification_as_read
-    redirect_to homepage_users_path
+    redirect_to user_matches_path(@user)
   end
 
   private

@@ -61,9 +61,23 @@
       <% end %>
       <div>
         <h5><%= user.first_name %></h5>
-        <p>Available days:<% user.days_available.each do |day| %>
-          <%= day %>
-        <% end %></p>
+        <span style= "font-size: 22px"><p>Available days:<% user.days_available.each do |day| %>
+          <% if day == "Monday" %>
+            <%= 'Mon' %>
+          <% elsif day == 'Tuesday' %>
+            <%= 'Tue' %>
+          <% elsif day == 'Wednesday' %>
+            <%= 'Wed' %>
+          <% elsif day == 'Thursday' %>
+            <%= 'Thur' %>
+          <% elsif day == 'Friday' %>
+            <%= 'Fri' %>
+          <% elsif day == 'Saturday' %>
+            <%= 'Sat' %>
+          <% elsif day == 'Sunday' %>
+            <%= 'Sun' %>
+          <% end %>
+        <% end %></p></span>
         <p>Age: <%= user.age %><span style="padding-left:12px"><%= link_to "See details", user_path(user) %></span></p>
       </div>
     </div>
