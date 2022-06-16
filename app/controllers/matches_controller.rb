@@ -17,8 +17,8 @@ class MatchesController < ApplicationController
     CommentNotification.with(message: "You recieved a match request from  #{User.find(@match.user_requester_id).first_name}").deliver(User.find(@match.user_receiver_id))
     @match.status = params[:status].to_i
     @match.save!
-    sleep(3)
-    redirect_to homepage_users_path
+    sleep(1)
+    redirect_to users_path status: :see_others
   end
 
   def update
@@ -30,6 +30,6 @@ class MatchesController < ApplicationController
       @chatroom = Chatroom.create(match_id: @match.id, name: @match.user_receiver.first_name)
     end
     CommentNotification.with(message: "Your match request was accepted by   #{User.find(@match.user_receiver_id).first_name}").deliver(User.find(@match.user_requester_id))
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: users_path)
   end
 end

@@ -8,22 +8,26 @@
     <div data-controller="tabs" class="tabs-container">
       <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a data-tabs-target="tab" data-action="click->tabs#activeClass" class="nav-link active" aria-current="page" href="#">Your GymBuddies</a>
+          <a data-tabs-target="tab2" data-action="click->tabs#activeClass" class="nav-link active" aria-current="page" href="#">Pending requests</a>
         </li>
         <li class="nav-item">
-          <a data-tabs-target="tab2" data-action="click->tabs#activeClass" class="nav-link" href="#">Pending requests</a>
+          <a data-tabs-target="tab" data-action="click->tabs#activeClass" class="nav-link" href="#">Your GymBuddies</a>
         </li>
       </ul>
-      <div class="list-match-to-accept" data-tabs-target="content">
+      <div class="list-match-to-accept d-none" data-tabs-target="content">
         <ul>
           <% if @my_gymbuddies %>
             <% @my_gymbuddies.each do |match| %>
               <% if current_user == match.user_requester %>
                 <div class="card-product my-4 me-1 border border-primary">
                   <% if match.user_receiver.photos.first %>
-                    <%= cl_image_tag match.user_receiver.photos.first.key, alt: "user image", id: "image" %>
+                    <%= link_to user_path(match.user_receiver) do %>
+                      <%= cl_image_tag match.user_receiver.photos.first.key, alt: "user image", id: "image" %>
+                    <% end %>
                   <% else %>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                    <%= link_to user_path(match.user_receiver) do %>
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                    <% end %>
                   <% end %>
                   <div class="card-product-infos">
                     <h1><%= match.user_receiver.first_name %></h1>
@@ -41,9 +45,13 @@
               <% else %>
                 <div class="card-product my-4 me-1 border border-primary">
                   <% if match.user_requester.photos.first %>
-                    <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                    <%= link_to user_path(match.user_requester) do %>
+                      <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                    <% end %>
                   <% else %>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                    <%= link_to user_path(match.user_requester) do %>
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                    <% end %>
                   <% end %>
                   <div class="card-product-infos">
                     <h2><%= match.user_requester.first_name %></h2>
@@ -64,14 +72,18 @@
         </ul>
       </div>
       <% if @my_match_to_accept_real %>
-        <div class="list-match-accepted d-none" data-tabs-target="content2">
+        <div class="list-match-accepted" data-tabs-target="content2">
           <ul>
               <% @my_match_to_accept_real.each do |match| %>
                 <div class="card-product my-4 me-1 border border-primary">
                 <% if match.user_requester.photos.first %>
-                  <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                  <%= link_to user_path(match.user_requester) do %>
+                    <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                  <% end %>
                 <% else %>
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                  <%= link_to user_path(match.user_requester) do %>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
+                  <% end %>
                 <% end %>
                   <div class="card-product-infos">
                     <h1><%= match.user_requester.first_name %></h1>
