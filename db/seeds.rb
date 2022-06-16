@@ -8,7 +8,7 @@ Activity.delete_all
 # User.delete_all
 
 puts "start creating activities"
-activities = ["crossfit","bodybuilding","tennis","climbing","swimming","golf","running"]
+activities = ["crossfit","bodybuilding","tennis","climbing","boxing","swimming","golf","running"]
 i = 0
 while i < activities.length
   Activity.create(
@@ -25,9 +25,9 @@ puts "start creating users"
   end_time1 = start_time1.to_i + rand(1..4).to_i
   gender = ["Male", "Female"].sample.to_s
   if gender == "Male"
-    file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870356/gym-buddy-males/#{rand(2..20)}.jpg")
+    file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870356/gym-buddy-males/#{rand(1..28)}.jpg")
   else
-    file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870284/Gym-buddy-females/#{rand(1..9)}.jpg")
+    file = URI.open("https://res.cloudinary.com/dmmli4rcp/image/upload/v1654870284/Gym-buddy-females/#{rand(1..21)}.jpg")
   end
   user = User.new(
     email: Faker::Internet.email,
@@ -35,7 +35,7 @@ puts "start creating users"
     last_name: Faker::Name.last_name,
     gender: gender,
     address: ["London", "Shoreditch", "Haggerston", "Hoxton", "Islington", "Bethnal Green", "Islington", "Dalston", "Hackney", "Barbican"].sample.to_s,
-    age: rand(18..39).to_i,
+    age: rand(20..35).to_i,
     level_of_fitness: ["Beginner","Intermediate","Advanced"].sample.to_s,
     days_available: ["Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday"].sample(3),
     start_time: start_time1,
