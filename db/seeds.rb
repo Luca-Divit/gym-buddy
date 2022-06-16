@@ -8,7 +8,7 @@ Activity.delete_all
 User.delete_all
 
 puts "start creating activities"
-activities = ["crossfit","bodybuilding","tennis","climbing","boxing","swimming","golf","running"]
+activities = ["crossfit","bodybuilding","tennis","climbing","swimming","golf","running"]
 i = 0
 while i < activities.length
   Activity.create(
