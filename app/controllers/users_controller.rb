@@ -72,6 +72,7 @@ class UsersController < ApplicationController
       :partner_gender_preference,
       :level_of_fitness,
       :bio,
+      :age,
       days_available: [],
       photos: [],
       user_activities_attributes: [:activity_ids => []]
