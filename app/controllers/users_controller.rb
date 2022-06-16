@@ -76,24 +76,35 @@ class UsersController < ApplicationController
 
   def filtered_users
     # 1 - Setting the factbase
-    @users = User.all
+    users = User.all
     @users_matching = []
 
     #removes the current user from the sample so they do not show up on the index page
-    @users.each do |user|
+    users.each do |user|
       if (user != current_user)
         @users_matching << user
       end
     end
-    #remove users that have already sent me a request
-    current_user.received_matches.each do |user|
-      @users_matching.delete(user)
+
+
+    #remove users that have I already have a match with
+    match_users = []
+    current_user.received_matches.each do |match|
+      match_users << match.user_requester_id.to_i
     end
 
-    #remove users that I have already sent a request
-    current_user.requested_matches.each do |user|
-      @users_matching.delete(user)
+
+    current_user.requested_matches.each do |match|
+      match_users << match.user_receiver_id.to_i
     end
+
+    users_matching_a = []
+      @users_matching.each do |user|
+        if match_users.include?(user.id.to_i) == false
+          users_matching_a << user
+        end
+      end
+    @users_matching = users_matching_a
 
     # 2 - Filter by activity if parameter provided by user
     current_user_activities_name = [] # get the activities of the current user if they exists
@@ -114,28 +125,30 @@ class UsersController < ApplicationController
       end
       @users_matching = @users_matching_1
     end
+
     # 3 - Filter by fitness level if paramter provided by user
-    @users_matching_2 = []
-    @users_matching.each do |user|
-      if user.level_of_fitness == current_user.level_of_fitness && current_user.level_of_fitness != ""
-        @users_matching_2 << user
-      else
-        @users_matching_2 << user
+    if current_user.level_of_fitness != ""
+      @users_matching_2 = []
+      @users_matching.each do |user|
+        if user.level_of_fitness == current_user.level_of_fitness
+          @users_matching_2 << user
+        end
       end
-      @users_matching = @users_matching_2
+        @users_matching = @users_matching_2
     end
+
 
     # 4 - Filter by preffered gender
     @users_matching_3 = []
-      if current_user.partner_gender_preference != "Flexible"
+      if current_user.partner_gender_preference != "Any"
         @users_matching.each do |user|
-        (user.gender == current_user.partner_gender_preference && (user.partner_gender_preference == current_user.gender || user.partner_gender_preference == "Flexible")) ? @users_matching_3 << user : nil
+        (user.gender == current_user.partner_gender_preference && (user.partner_gender_preference == current_user.gender || user.partner_gender_preference == "Any")) ? @users_matching_3 << user : nil
         end
       else
         @users_matching.each do |user|
-        (user.partner_gender_preference == current_user.gender || user.partner_gender_preference == "Flexible") ? @users_matching_3 << user : nil
+        (user.partner_gender_preference == current_user.gender || user.partner_gender_preference == "Any") ? @users_matching_3 << user : nil
         end
       end
       @users_matching = @users_matching_3
-  end
+    end
 end

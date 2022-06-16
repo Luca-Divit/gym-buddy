@@ -11,7 +11,7 @@
       <h2 style= "color: #F4F4F4">My profile</h2>
     </div>
   </div>
-  <div class="accordion .accordion-flush pt-3 " id="accordionExample">
+  <div class="accordion .accordion-flush pt-3 " id="accordionExample" , style ="margin-bottom:60px">
     <div class="accordion-item mb-3">
       <h2 class="accordion-header" id="headingTwo">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -24,7 +24,7 @@
             <%= f.input :first_name %>
             <%= f.input :last_name %>
             <%= f.input :address %>
-            <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
+            <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female', 'Non-binary'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
             <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
           <% end %>
         </div>
@@ -43,7 +43,8 @@
               <%# <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'], wrapper: :horizontal_collection_inline%>
               <%= f.input :days_available, as: :check_boxes, collection: ['monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
               <%= f.input :level_of_fitness, as: :radio_buttons, collection: ['Beginner', 'Intermediary', 'Expert'],input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
-              <%= f.input :partner_gender_preference, as: :radio_buttons, collection: ['Male', 'Female', 'Flexible'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
+              <%= f.input :partner_gender_preference, as: :radio_buttons, collection: ['Male', 'Female', 'Non-binary','Any'], input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
+
               <%= f.button :submit,data: { 'turbo-method': :patch }, class: "btn btn-primary " %>
             <% end %>
           </div>
@@ -104,7 +105,7 @@
       </div>
     </div>
   </div>
-  <%= link_to "Log out", destroy_user_session_path, data:{ turbo_method: :delete }, class: "btn btn-flat btn-primary btn-lg w-100" %>
-  <%= render "shared/footer" %>
   </div>
+  <%= link_to "Log out", destroy_user_session_path, data:{ turbo_method: :delete } , style:"text-decoration:none; padding-top:20px; padding-left: 20px;" %>
 </div>
+<%= render "shared/footer" %>

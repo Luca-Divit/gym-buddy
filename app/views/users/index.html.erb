@@ -12,7 +12,23 @@
         <div>
           <h5><%= user.first_name %></h5>
           <p>Activities:<% user.activities.each do |activities| %>
-          <%= activities.name.capitalize %>
+          <% if activities.name == 'climbing' %>
+            Climbing <i class="fa-solid fa-person-hiking"></i>
+          <% elsif activities.name == 'swimming' %>
+            Swimming <i class="fa-solid fa-person-swimming"></i>
+          <% elsif activities.name == 'boxing' %>
+            Boxing <i class="fa-solid fa-boxing-glove"></i>
+          <% elsif activities.name == 'crossfit' %>
+            Crossfit <i class="fa-solid fa-arrows-cross"></i>
+          <% elsif activities.name == 'running' %>
+            Running <i class="fa-solid fa-person-running"></i>
+          <% elsif activities.name == 'bodybuilding' %>
+            Bodybuilding <i class="fa-solid fa-dumbbell"></i>
+          <% elsif activities.name == 'tennis' %>
+            Tennis <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+          <% elsif activities.name == 'golf' %>
+            Golf <i class="fa-solid fa-golf-flag-hole"></i>
+          <% end %>
           <% end %></p>
           <p>Age: <%= user.age %><span style="padding-left:12px"><%= link_to "See details", user_path(user) %></span></p>
         </div>
