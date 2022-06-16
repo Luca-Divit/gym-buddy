@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @match_current_user = Match.find_by(user_requester_id: current_user.id, user_receiver_id: @user.id) || Match.find_by(user_requester_id: @user.id, user_receiver_id: current_user.id)
     @markers = [
       {
         lat: @user.latitude,

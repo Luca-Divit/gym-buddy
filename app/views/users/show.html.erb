@@ -1,26 +1,30 @@
 <%= render "shared/navbar" %>
 <div class="container" style= "background-color:#222222; color:#FFFFFF;padding-top: 4rem;padding-bottom: 37px;" data-controller="request">
   <div class = "mb-4 pt-4 d-flex justify-content-between">
-    <div data-action="click->request#DiscardRequest">
+      <div data-action="click->request#DiscardRequest">
+    <% unless @match_current_user %>
       <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 2), data:{ turbo_method: :post } do %>
         <span class="fa-stack fa-2x" style = "font-size: 16px">
           <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
           <i data-request-target="discardRequest" class="fa-solid fa-thumbs-down fa-stack-1x fa-inverse send-request"></i>
         </span>
       <% end %>
-    </div>
+    <% end %>
+      </div>
     <div>
       <h3 class="text-center"><%= @user.first_name %>, <%= @user.age %></h3>
       <p>Fitness Level: <%= @user.level_of_fitness %></p>
     </div>
-    <div data-action="click->request#SendRequest">
-      <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post } do %>
-        <span class="fa-stack fa-2x" style = "font-size: 16px">
-          <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
-          <i data-request-target="sendRequest" class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse send-request"></i>
-        </span>
-      <% end %>
-    </div>
+      <div data-action="click->request#SendRequest">
+        <% unless @match_current_user %>
+          <%= link_to user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post } do %>
+            <span class="fa-stack fa-2x" style = "font-size: 16px">
+              <i class="fa-solid fa-square fa-stack-2x" style= "color:#222222; border: 1px solid #353D43; border-radius:5px"></i>
+              <i data-request-target="sendRequest" class="fa-solid fa-thumbs-up fa-stack-1x fa-inverse send-request"></i>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
   </div>
 
   <div class = "show-img text-center mb-4">
@@ -30,9 +34,11 @@
       <%= image_tag "avatarplace.png", alt: "avatar",style: "object-fit:cover; width: 90%; height: 20rem; " %>
     <% end %>
   </div>
-  <div data-action="click->request#SendRequest">
-    <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
-  </div>
+  <% unless @match_current_user %>
+    <div data-action="click->request#SendRequest">
+      <%= link_to "Send Request", user_matches_path(@user, user_requester_id: current_user.id, user_receiver_id: @user.id, status: 0), data:{ turbo_method: :post }, class: "btn btn-primary mb-3", style: "margin-left: 120px" %>
+    </div>
+  <% end %>
   <div>
     <div class= "basic-info" style = "border-bottom:1px">
       <h6>Basic information</h6>
