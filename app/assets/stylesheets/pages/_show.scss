@@ -83,10 +83,15 @@
 
 .black {
   text-decoration: none;
-  color: black;
-  background-color: $our-yellow;
+  color: $our-white;
+  background-color: #222222;
 }
 
 #padding-bottom {
   padding-bottom: 70px;
+}
+
+.mapboxgl-popup-content {
+  color: $our-white;
+  background-color: #222222;
 }

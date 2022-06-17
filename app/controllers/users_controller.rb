@@ -12,12 +12,14 @@ class UsersController < ApplicationController
       {
         lat: @user.latitude,
         lng: @user.longitude,
-        info_window: render_to_string(partial: "info_window", locals: {user: @user})
+        info_window: render_to_string(partial: "info_window", locals: {user: @user}),
+        image_url: helpers.asset_url("marker.png")
       },
       {
         lat: current_user.latitude,
         lng: current_user.longitude,
-        info_window: render_to_string(partial: "info_window", locals: {user: current_user})
+        info_window: render_to_string(partial: "info_window", locals: {user: current_user}),
+        image_url: helpers.asset_url("marker.png")
       }
     ]
   end
@@ -27,7 +29,8 @@ class UsersController < ApplicationController
       {
         lat: user.latitude,
         lng: user.longitude,
-        info_window: render_to_string(partial: "info_window", locals: {user: user})
+        info_window: render_to_string(partial: "info_window", locals: {user: user}),
+        image_url: helpers.asset_url("marker.png")
       }
     end
   end
