@@ -78,15 +78,38 @@
                 <div class="card-product my-4 me-1 border border-primary">
                 <% if match.user_requester.photos.first %>
                   <%= link_to user_path(match.user_requester) do %>
-                    <%= cl_image_tag match.user_requester.photos.first.key, alt: "user image", id: "image" %>
+                  <div class = "activity-card mb-3">
+                    <%= cl_image_tag match.user_requester.photos.first.key, alt: "", id: "image" %>
                   <% end %>
                 <% else %>
                   <%= link_to user_path(match.user_requester) do %>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZem4co5Itv4LZwtQnvcj66ODvDWulDUupQ&usqp=CAU" alt="image">
                   <% end %>
                 <% end %>
-                  <div class="card-product-infos">
-                    <h1><%= match.user_requester.first_name %></h1>
+                    <div>
+                      <h5><%= match.user_requester.first_name %></h5>
+                      <p>Activities:<% match.user_requester.activities.each do |activities| %>
+                      <% if activities.name == 'climbing' %>
+                        Climbing <i class="fa-solid fa-person-hiking"></i>
+                      <% elsif activities.name == 'swimming' %>
+                        Swimming <i class="fa-solid fa-person-swimming"></i>
+                      <% elsif activities.name == 'boxing' %>
+                        Boxing <i class="fa-solid fa-boxing-glove"></i>
+                      <% elsif activities.name == 'crossfit' %>
+                        Crossfit <i class="fa-solid fa-arrow-down-up-across-line"></i>
+                      <% elsif activities.name == 'running' %>
+                        Running <i class="fa-solid fa-person-running"></i>
+                      <% elsif activities.name == 'bodybuilding' %>
+                        Bodybuilding <i class="fa-solid fa-dumbbell"></i>
+                      <% elsif activities.name == 'tennis' %>
+                        Tennis <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                      <% elsif activities.name == 'golf' %>
+                        Golf <i class="fa-solid fa-golf-club"></i>
+                      <% end %>
+                      <% end %></p>
+                      <p>Age: <%= match.user_requester.age %></p>
+                    </div>
+                  </div>
                   </div>
                 </div>
                 <div class="buttons d-flex justify-content-evenly">
@@ -101,3 +124,10 @@
   </div>
   <%= render "shared/footer" %>
 </div>
+<% @users_matching.each do |user| %>
+    <% if user != current_user %>
+      <div class = "activity-card mb-3">
+        <img src="<%= cl_image_path user.photos.first.key%>" alt="">
+
+    <% end %>
+  <% end %>
