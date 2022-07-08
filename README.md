@@ -1,1 +1,1 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+Matching web app for gym goers, helps you to find someone to train with, insert your preferences on your profile, send and accept buddy up requests.
