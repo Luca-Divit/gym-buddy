@@ -86,5 +86,6 @@ Then type *localhost:3000* in your favourite browser
   - <a href="https://github.com/Sikaopa">George Nachar</a>
 
 **For giving life to this original idea**
-
-<img src="https://img.shields.io/github/stars/Luca-Divit/gym-buddy.svg" />
+<p align="center">
+<a href="https://hits.sh/github.com/Luca-Divit/gym-buddy/"><img alt="Hits" src="https://hits.sh/github.com/Luca-Divit/gym-buddy.svg?style=plastic&label=Visitors&extraCount=784&color=007ec6"/></a>
+</p>
