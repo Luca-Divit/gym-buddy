@@ -7,4 +7,12 @@
 <h2>About GymBuddy</h2>
 <p>The biggest barrier for the average person in being consistent with physical activity is the lack of motivation. Studies reavealed that having someone to train with as well as keeping ourselves accountable overcome this obstacle</p>
 <p>With GymBuddy you can find a fitness partner in just a couple of clicks!</p>
+
+*<h4>How it works</h4>*
+1. Create your profile and define your training preferences
+2. View gymgoers near you and send a request
+3. Once accepted, you can start messagging and arrange you next session
+
+*<h4>See in action</h4>*
+<img src="https://res.cloudinary.com/detwvcqim/image/upload/v1681667634/gymBuddy_ick8ih.gif" height=300 />
 <img src="https://img.shields.io/github/stars/Luca-Divit/gym-buddy.svg" />
