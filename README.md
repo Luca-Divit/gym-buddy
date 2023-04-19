@@ -11,7 +11,7 @@
 *<h4>How it works</h4>*
 1. Create your profile and define your training preferences
 2. View gymgoers near you and send a request
-3. Once accepted, you can start messagging and arrange you next session
+3. Once accepted, you can start messaging and arrange your next session
 
 *<h4>See in action</h4>*
 <img src="https://res.cloudinary.com/detwvcqim/image/upload/v1681667634/gymBuddy_ick8ih.gif" height=300 />
